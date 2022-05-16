@@ -39,3 +39,5 @@ sudo usermod -a -G ...
 ```
 
 ## Exercise
+1. Create a user for your neighbor
+2. Let the neighbor chose their password (use simple passwords, used for this exercise)

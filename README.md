@@ -1,4 +1,4 @@
-# fe-ros-docs
+# linux-fe
 Holds the source file for the Github Pages webpage built with [MkDocs](https://www.mkdocs.org/).
 
 The sources get automatically built on every push to the `main` branch.
