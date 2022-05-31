@@ -1,30 +1,18 @@
 ## What is Linux
 
+> Linux is a community of open-source operating systems that are developed on top of the Linux kernel
+>
+>\- From [linuxhint.com](https://linuxhint.com/history-of-linux/)
+
+<!-- Short history of Linux -->
 ## Why would I want to learn this?
 
-## What is Bash?
+This course is focused on giving the basic knowledge of Linux to students of robotics. Throughout the course we will not learn any commands that could be labeled as "robot-specific". However, due to the ever-growing importance of ROS in the robotics community, we find it necessary that students that study robotics also learn the basics of the operating system that ROS is *most* used on.
 
-From [educative.io](https://www.educative.io/courses/master-the-bash-shell/3j8399P3M6M):
-> Bash is a shell program.
-> A shell program is typically an executable binary that takes commands that you type and (once you hit return),translates those commands into (ultimately) system calls to the Operating System API.
+## Starting with the workshop
 
-If you want to know what Bash can do simply ask:
-```
-user@ubuntu:~# help
-```
+For the purpose of this workshop we have created a bootable USB drive with Ubuntu preinstalled. When you  turn on your screen you should be greeted by a nice desktop environment. Follow the next steps:
 
-That was not useful, was it? :) That is why we are going to have this workshop today.
-
-<!-- Hidden information -->
-<!-- The content in this page was inspired by: -->
-<!--  https://www.educative.io/courses/master-the-bash-shell/3j8399P3M6M -->
-
-## Looking for help
-
-```
-$ man <command>
-```
-
-```
-$ <command> --help
-```
+- Have a good look at it
+- Say good bye to it
+- Press `Ctrl+Alt+F1`

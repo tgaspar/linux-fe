@@ -14,6 +14,7 @@ nav:
     - About: 'about/index.md'
     - The Workshop:
       - Introduction: 'workshop/introduction.md'
+      - The command line: 'workshop/command-line.md'
       - Filesystem and navigation: 'workshop/filesystem-and-navigation.md'
       - Users, groups and permissions: 'workshop/usr-grp-perm.md'
       - Pipes, Redirects and scripts: 'workshop/shell-scripting.md'
@@ -24,12 +25,12 @@ nav:
     - Additional knowledge: 'additional/index.md'
 theme:
   name: material
-  palette: 
+  palette:
     - scheme: default
       toggle:
-        icon: material/lightbulb-outline 
+        icon: material/lightbulb-outline
         name: Switch to dark mode
-    - scheme: slate 
+    - scheme: slate
       toggle:
         icon: material/lightbulb
         name: Switch to light mode
