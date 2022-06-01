@@ -1,14 +1,14 @@
 
 # Project information
-site_url: https://ros-fe.github.io/fe-ros-docs/
+site_url: https://github.com/tgaspar/linux-fe/
 site_author: Timotej Gašpar
 site_description: >-
-  FE ROS workshop documentation page.
+  Linux for roboticists.
 # Repository
 repo_name: tgaspar/
 repo_url: https://github.com/tgaspar/linux-fe
 
-site_name: FE ROS
+site_name: Robolab Linux
 nav:
     - Home: 'index.md'
     - About: 'about/index.md'

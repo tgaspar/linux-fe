@@ -105,6 +105,46 @@ $ echo This workshop is amazing!
 This workshop is amazing!
 ```
 See? Much better!
+
+> **Tip:** Use `man` to open the manual of a command
 ```
 $ man <command>
 ```
+
+## Let's tell the computer to get us coffee (i.e. the `alias` command)
+
+As we learned before, Bash does not recognize `bring-me-coffee` as a valid command. Let's change this by
+defining `bring-me-coffee` as an `alias`.
+
+We should first look how to use this command:
+```
+$ alias --help
+alias: alias [-p] [name[=value] ... ]
+    Define or display aliases.
+
+    Without arguments, `alias' prints the list of aliases in the reusable
+    form `alias NAME=VALUE' on standard output.
+
+    Otherwise, an alias is defined for each NAME whose VALUE is given.
+    A trailing space in VALUE causes the next word to be checked for
+    alias substitution when the alias is expanded.
+
+    Options:
+      -p        print all defined aliases in a reusable format
+
+    Exit Status:
+    alias returns true unless a NAME is supplied for which no alias has been
+    defined.
+```
+
+We will now use the `alias` command do tell Bash what `bring-me-coffee` should do:
+```
+$ alias bring-me-coffee="echo Go get it yourself!"
+```
+
+Try it out:
+```
+$ bring-me-coffee
+```
+
+After reading this you're probably asking yourself: "How will this bring me coffee?". We never promised you coffee, we said that we want Bash to recognize the command ¯\\\_(ツ)\_/¯.
