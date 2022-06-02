@@ -96,6 +96,30 @@ $ ls
 file1  file2
 ```
 Ahhh, much better!
+
+Create a new file and give it a very random name. For instance, `aksdjasdjasd`:
+```
+$ touch aksdjasdjasd
+```
+
+List all the files in the directory and lay your eyes on your newly created abomination:
+```
+$ ls
+file1  file2  aksdjasdjasd
+```
+We should clear it up, right? Let's `r`e`m`ove the file with the `rm` command:
+```
+$ rm aksdjasdjasd
+```
+If you now list the files in this directory you will see that order was restored. Hooraay!
+
+### Auto-completion with the `Tab` key
+You probably found typing the randomly created name rather tedious. Linux of course does not want you to spend time to type tedious names. For this reason, Linux supports auto-completion by hitting the `Tab` key.
+
+Let's repeat the above example of creating a random file and removing it. This time, try typing the first 3 letters and then hit tab. You will see that the terminal wrote the name of the file for you.
+
+Aut-completion with the `Tab` key works on almost everything in Linux: navigation directories, listing files, completing commands, etc. Use it!
+
 ## Directory manipulation
 
 So far we've explored how to create a file (`touch`), copy a file (`cp`) and rename/move a file (`mv`). But how about directories?
@@ -178,3 +202,9 @@ Worked like charm!
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!--  -->
+
+1. Without leaving the `Desktop` directory, create the following directory hierarchy in `home/user/Documents`: `Workshops/Linux FE`.
+
+2. Without leaving the `Desktop` directory, create a file in the newly created directory called `morning.txt`.
+
+3. Move to the newly created directory and delete all the clutter we've made on the `Desktop`.
