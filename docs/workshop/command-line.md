@@ -1,6 +1,6 @@
 ## The command line
 
-When people hear of Linux one of the first things that come to their mind is the big scarry command line interface. When you followed the previous you switched to something called **Virtual Terminal**. We will be spending only a little time in here so don't worry. By the end of this chapter we will be back to the nice and cosy Desktop Environment.
+When people hear of Linux one of the first things that come to their mind is the big scarry command line interface. When you followed the previous instructions you switched to something called **Virtual Terminal**. We will be spending only a little time in here so don't worry about it. By the end of this chapter we will be back to the nice and cosy Desktop Environment.
 
 What you have in front of you is how the command line **typically** (modifications can be made, of course) looks:
 
@@ -8,13 +8,13 @@ What you have in front of you is how the command line **typically** (modificatio
 user@ubuntu:~$
 ```
 
-Let's inspects what is printed in there:
+Let's inspects what is displayed in there:
 - `user` - tells us who is logged in
 - `@ubuntu` - tells us the name of the machine we are using
 - `~` - tells us what is the current working directory
 - `$` - tells us we are logged in as a normal user (as opposed to `root`, but more about this later).
 
-Let's type a command and see what happens:
+We can try typing a command and see what happens:
 
 ```
 user@ubuntu:~$ bring-me-coffee

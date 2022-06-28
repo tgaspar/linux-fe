@@ -1,10 +1,10 @@
-Let's start this section of the workshop with something extremely daring: peaking into the `/root` directory! Type the following command:
+Let's start this section of the workshop with something extremely daring: peeking into the `/root` directory! Type the following command:
 ```
 $ ls /root
 ls: cannot open directory '/root/': Permission denied
 ```
 
-Ok, let's try something different, for installing a new program:
+Ok, let's try something different. For example, installing a new program:
 ```
 $ apt install sl
 E: Could not open lock file /var/lib/dpkg/lock - open (13: Permission denied)
@@ -14,7 +14,7 @@ What the heck?!
 
 ## Super user do - `sudo`
 
-In the two examples above we've learned that not all doors are open and that we can't just go about installing software. Linux in general was built with security in mind. Reading or writing system files or installing new programs is something that not everyone should have the authority to do. 
+In the two examples above we've learned that not all doors are open and that we can't just go about installing software. Linux in general was built with security in mind. Reading or writing system files or installing new programs is something that not everyone should have the authority to do.
 
 I know what you're next question is though: what if this is your computer and if you want to do whatever you please with it? Isn't making mistakes the best way to learn things?!
 
@@ -22,14 +22,14 @@ No worries, you can make mistakes and do whatever you please. Simply tell the Li
 ```
 sudo apt install -y sl
 ```
-After you typed your password the program got installed. Great! You now know how to go about restrictions. Is this really safe, though? 
+After you typed your password the program got installed. Great! You now know how to go about restrictions. Is this really safe, though?
 
 ## Permissions
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!-- https://linuxfoundation.org/blog/classic-sysadmin-understanding-linux-file-permissions/ -->
 
-What if you're the administrator of the computer with multiple users on. You don't want them all to have the power to invoke whatever command with `sudo`. However, you still want them to have some freedom within their own directory. Perhaps also share some directories between them. This is handled by permission on directories. 
+What if you're the administrator of the computer with multiple users on. You don't want them all to have the power to invoke whatever command with `sudo`. However, you still want them to have some freedom within their own directory. Perhaps also share some directories between them. This is handled by permission on directories.
 
 Inspect the output of the following command:
 ```
@@ -70,15 +70,15 @@ drwxr-xr-x   3 root root    4096 Jan 12  2021 home
     - `-` - file,
     - `l` - `l`ink.
   - `rwx` - The owner of this directory has the following permissions: `r`ead, `w`rit and e`x`ecute.
-  - `r-x` - The group assigned to this directory has the following permissions: `r`ead and e`x`ecute. 
-  - `r-x` - All users have the following permissions: `r`ead and e`x`ecute. 
+  - `r-x` - The group assigned to this directory has the following permissions: `r`ead and e`x`ecute.
+  - `r-x` - All users have the following permissions: `r`ead and e`x`ecute.
 - `3` - The number of hard links assigned to this directory.
 - `root` - The owner of the directory.
 - `root` - The group assigned to this directory.
 - `4096` - The size in bytes.
 - `Jan 12  2021` - The date when the directory was last modified.
 - `home` - The name of the directory
-  
+
 > **Note**: Try using `ls` with the `-h` flag and observe how the size of the files/directories gets displayed.
 
 ![https://www.liquidweb.com](../assets/images/permissions.png)
@@ -90,7 +90,7 @@ $ mkdir /home/user1
 mkdir: cannot create directory ‘user1’: Permission denied
 ```
 
-Let's now have a look at the permissions of your own home directory: 
+Let's now have a look at the permissions of your own home directory:
 ```
 $ ls -l /home
 drwxr-xr-x  6 user user 4096 Mar 26  2020 user
@@ -135,7 +135,7 @@ The `chmod` command offers two methods to manipulate with permissions on a singl
    ```
    $ chmod a+r secret
    ```
-   2. Give the group the permission to execute the file: 
+   2. Give the group the permission to execute the file:
    ```
    $ chmod g+x secret
    ```
@@ -148,7 +148,7 @@ The `chmod` command offers two methods to manipulate with permissions on a singl
    ```
    $ chmod 444 secret
    ```
-   2. Give **only** the group the permission to **only** execute the file: 
+   2. Give **only** the group the permission to **only** execute the file:
    ```
    $ chmod 010 secret
    ```
@@ -180,7 +180,7 @@ We can now start experimenting. Create a directory in `Desktop` called `only-rea
 $ mkdir ~/Desktop/only-readers
 ```
 
-Try out what you can do. For instance, navigate into it with the `cd` command, list what is in that directory with `ls`, create a new file in that directory with `touch`, etc. 
+Try out what you can do. For instance, navigate into it with the `cd` command, list what is in that directory with `ls`, create a new file in that directory with `touch`, etc.
 
 Let's now change the group of this directory and assign permissions of `rwx` to the group only. Navigate to the `Desktop` and invoke the following commands:
 ```
@@ -191,7 +191,7 @@ Repeat the actions from before, i.e. `cd`, `ls`, `touch`. Can you still do it? Y
 ```
 $ chgrp readers only-readers
 ```
-Try the `cd`, `ls` and `touch` commands. What's the result? 
+Try the `cd`, `ls` and `touch` commands. What's the result?
 
 The reason why you no longer able to do anything there is because this directory's usage is now limited only to the group `readers` and you're not part of it. We can change this, though:
 ```
@@ -209,7 +209,7 @@ There are two very similar commands in Linux to create a user: `useradd` and `ad
 
 Create a user to test things out with the `useradd` command:
 ```
-$ useradd -p 1234 reader 
+$ useradd -p 1234 reader
 ```
 > **Note**: This is just a demo. Do not use simple passwords as `1234` in your daily life.
 
@@ -258,7 +258,7 @@ $ ls -l secrets
 
 ## Exercise
 
-In this exercise you will be creating an environment of directories for your neighborhood. In there there will be various directories, each serving a specific purpose. 
+In this exercise you will be creating an environment of directories for your neighborhood. In there there will be various directories, each serving a specific purpose.
 
 1. In the root path (`/`) create a directory called `neighborhood`
 2. Create a new user with `adduser` for the person sitting next to you (let them chose their own password)
