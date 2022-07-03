@@ -20,7 +20,7 @@ $ $number
 
 What happened?
 
-When we executed `$number` the terminal looked at its value and substituted the command with a `1`. This is essentially the same as simply trying to exectue `1` as a command:
+When we executed `$number` the terminal looked at its value and substituted the command with a `1`. This is essentially the same as simply trying to execute `1` as a command:
 ```
 $ 1
 1: command not found
@@ -210,12 +210,27 @@ We can see, that the result is the same.
 
 Before we proceed with scripts it's time to learn about file editors that we can use in the command line. The most basic and suggested one is `nano`.
 
-Real pros however use `vim`. However, there's this joke about `vim`.
+You will often hear that real pros use `vim`. However, there's this joke about `vim`:
 ![Exiting vim](../assets/images/exit-vim.png)
 
 To make our life easy and not spend the next 2 hours learning the basic usage of `vim`, we will proceed with `nano`.
 
+Let's quickly try editing a file with `nano`:
+```
+$ nano delete_me.txt
+```
+Once this command is executed your terminal will transform into a text editor. See the image below:
+![Nano text editor](../assets/images/nano.jpg)
 
+Let's write something simple. Don't mind the content, as the name of the file suggests, we are going to delete it soon after.
+
+After you wrote something, look at the bottom of the terminal window. You will see some tooltips: `^G Get help`, `^O WriteOut`, etc. These tool tips tell you what hot-keys do what. But the letters are followed by this odd character `^`. This character represents the `Ctrl` key on the keyboard. To save the file follow the `Write Out` tooltip and press `Ctrl + O`. The editor will ask you to confirm the name of the file. Simply press enter to do so. Congratulations, you now know how to use one of the text editor in Linux.
+
+Before proceeding, let's remove the newly created file:
+```
+$ rm delete_me.txt
+```
+> **Note**: If you're having troubles exiting `nano`, follow the tooltips at the bottom. To exit `nano` simply press `Ctrl + X`.
 ## Scripts
 
 We now know how to sort the output of a command, write contents into a file and read from a file. It is now time to learn how to write some shell scripts that can do complicated operations by simply invoking them.
@@ -250,6 +265,32 @@ $ ./my_script.sh
 ```
 > **Note**: Executing scripts works only by providing their full path. If we put the script elsewhere, we need to run it like `./some/other/directory/my_script.sh`. To make a script accessible from anywhere we can move it to `/usr/local/bin`.
 
+### Passing arguments to a script
+
+Input arguments are accessible by the `$` operator. The arguments passed to a script are positional. Which means, the order we pass them is important when accessing them. The `$` operator is the prefix to the number of the positional argument we want to access. We can take the following example of calling `my_script.sh` and providing some arguments:
+```
+$ ./my_script.sh one two three
+```
+The `one`, `two` and `three` are accessible with `$1`, `$2` and `$3`, respectively. Open the `my_script.sh` file with `nano` and modify as follows:
+```bash
+echo This message came from a script. The first three input parameters are $1, $2 and $3.
+```
+Try to execute the script again with the positional arguments `one`, `two` and `three` and observe the output.
+
+> **Note**: The `$0` stores the information of the command that has just been executed. In the above example, it would be the following string: `./my_script.sh`.
+
+Will a fourth positional argument be printed if we provide it? Or a fifth positional argument? What if we want to support unlimited positional arguments?
+
+In this case we can use the `$@`. This will pack all the positional arguments into an array that we can use. Using `nano` we modify the `my_script.sh` file's content to the following:
+```bash
+echo This message came from a script. All the provided positional arguments are: $@.
+```
+You can now experiment with different number of arguments.
+
+> Further reading:
+> - https://www.baeldung.com/linux/use-command-line-arguments-in-bash-script
+> - https://www.linux.org/threads/bash-04-%E2%80%93-input-from-user.39293/
+
 ### Quick words about shebangs
 
 In the future, when you are a Linux pro and your only operating system is Linux, you will look for various scripts online that do this or that task. When reading these scripts, you will quickly notice that almost all of them have this unique first line that looks something like this: `#!/bin/bash`. This is the so called **shebang**.
@@ -259,21 +300,350 @@ The purpose of this line as the first file is to instruct the kernel which inter
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!-- https://linuxize.com/post/bash-shebang/ -->
-### `while`
-<!-- Hidden information -->
-<!-- The content in this page was inspired by: -->
-<!-- https://linuxize.com/post/bash-while-loop/ -->
-### `if`
+
+### Conditional expressions
+Before we dive into the world of conditional statements and loops, we need to learn how Bash knows if something is *true* or *false*. The built-in `test` command will evaluate if a certain statement is true or false and then exit with the relevant status. For instance, `test -a my_script.sh` will return *true* in case the `my_script` file exists or *false* in case it does not. These returns are not visible or printed! For more information, refer to the command's manual page: `man test`.
+
+In practice, we rarely use the `test` command. Instead, we use its aliases `[` or `[[`. The statement from the previous example would therefore translate to ` [ -a my_script.sh ]` or `[[ -a my_script.sh ]]`. The `[[` is  the "upgraded versions and is supported on most modern systems.
+
+> **Important**: The `[` and `[[` aliases is a command! This means that it **must** be followed by a whitespace! `[-a my_script.sh]` will return an error.
+
+The list of possible flags and options how to use the conditional expressions is listed below and is taken from GNU's official pages:
+```
+-a file : True if file exists.
+-b file : True if file exists and is a block special file.
+-c file : True if file exists and is a character special file.
+-d file : True if file exists and is a directory.
+-e file : True if file exists.
+-f file : True if file exists and is a regular file.
+-g file : True if file exists and its set-group-id bit is set.
+-h file : True if file exists and is a symbolic link.
+-k file : True if file exists and its "sticky" bit is set.
+-p file : True if file exists and is a named pipe (FIFO).
+-r file : True if file exists and is readable.
+-s file : True if file exists and has a size greater than zero.
+-t fd   : True if file descriptor fd is open and refers to a terminal.
+-u file : True if file exists and its set-user-id bit is set.
+-w file : True if file exists and is writable.
+-x file : True if file exists and is executable.
+-G file : True if file exists and is owned by the effective group id.
+-L file : True if file exists and is a symbolic link.
+-N file : True if file exists and has been modified since it was last read.
+-O file : True if file exists and is owned by the effective user id.
+-S file : True if file exists and is a socket.
+
+file1 -ef file : True if file1 and file2 refer to the same device and inode numbers.
+file1 -nt file : True if file1 is newer (according to modification date) than file2, or if file1 exists and file2 does not.
+file1 -ot file : True if file1 is older than file2, or if file2 exists and file1 does not.
+
+-o optname : True if the shell option optname is enabled. The list of options appears
+             in the description of the -o option to the set builtin (see The Set Builtin).
+-v varname : True if the shell variable varname is set (has been assigned a value).
+-R varname : True if the shell variable varname is set and is a name reference.
+-z string  : True if the length of string is zero.
+-n string  : True if the length of string is non-zero.
+
+string1 == string2 : True if the strings are equal. When used with the [[ command, this performs pattern matching.
+string1 != string2 : True if the strings are not equal.
+string1 < string2  : True if string1 sorts before string2 lexicographically.
+string1 > string2  : True if string1 sorts after string2 lexicographically.
+```
+Source: [https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html](https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html)
+
+### Conditional statements `if` and `case`
+### If this than that
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!-- https://linuxize.com/post/bash-if-else-statement/ -->
-### `case`
+The `if` conditional statement is used to make decisions and perform commands based on the evaluation of a certain expression. It also supports the "else if" (`elif`) and "else" (`else`) statements. The syntax is the following.
+```bash
+if TEST-COMMAND1
+then
+  STATEMENTS1
+elif TEST-COMMAND2
+then
+  STATEMENTS2
+else
+  STATEMENTS3
+fi
+```
+
+Let's try a simple example. Using `nano`, write the following file (name it `if_statement.sh`) and make it executable:
+```bash
+#!/bin/bash
+i=$1
+if [[ $i == 1 ]]
+then
+  echo "i is 1"
+elif [[ $i == 2 ]]
+then
+  echo "i is 2"
+else
+  echo "i is neither 1 or 2 but it is $i"
+fi
+```
+
+Execute the script with `./if_statement 1` and observe the output. Play around with changing the value of the first argument and see different prints.
+> **Note**: The above example treats `i` as a string! The `==`, `!=`, `<` and `>` conditional operators work with strings.
+
+Let's spice things up and try to write the same script but where `i` is treated as an integer:
+```bash
+#!/bin/bash
+i=$1
+if [[ $i -eq 1 ]]
+then
+  echo "i is 1"
+elif [[ $i -eq 2 ]]
+then
+  echo "i is 2"
+else
+  echo "i is neither 1 or 2 but it is $i"
+fi
+```
+
+We cal put multiple conditions to be evaluated with a single conditional expression using the logical AND (`&&`) and OR (`||`) operators:
+```bash
+#!/bin/bash
+i=$1
+if [[ $i -eq 1 ]]
+then
+  echo "i is 1"
+elif [[ $i -ge 2 ]] && [[ $i -le 4 ]]
+then
+  echo "i is between 2 and 4"
+else
+  echo "i is not within the desired range."
+fi
+```
+
+The `if` statement can also be used with normal commands without the use of the `test` (and it's aliases, e.g. `[[`). In case of using commands the expression will be evaluated as *true* in case there are no errors. We can try this by modifying our `if_statement.sh`:
+```bash
+#!/bin/bash
+if ls if_statement.sh
+then
+  echo "The command was successful! The file exists!"
+else
+  echo "The command returned an error. The file does not exist!"
+fi
+```
+Try changing `ls if_statement.sh` into `ls case_statement.sh`.
+### In case ...  do ...
+The `case` conditional statement has the following syntax:
+```bash
+case EXPRESSION in
+
+  PATTERN_1)
+    STATEMENTS
+    ;;
+
+  PATTERN_2)
+    STATEMENTS
+    ;;
+
+  PATTERN_N)
+    STATEMENTS
+    ;;
+
+  *)
+    STATEMENTS
+    ;;
+esac
+```
+
+Let's create a new script called `case_statement.sh` (don't forget to make it executable) and rewrite the example from `if` with `case`:
+```bash
+#!/bin/bash
+i=$1
+case $i in
+
+  1)
+    echo "i is 2"
+    ;;
+
+  2)
+    echo "i is 2"
+    ;;
+
+  *)
+    echo "i is neither 1 or 2 but it is $i"
+    ;;
+esac
+```
+Similarly to what we've been doing before, let's execute this script with different values of the positional argument and observe the output.
+
+The `case` conditional statement does not understand numbers. It only works with strings. However, it does support pattern matching. We can try this out. Our task is to write a script that prints a greeting in the selected language. This script will support a limited number of languages and will warn us if we provide a language that it does not support. Our boss told that that it's imperative that it supports the following languages: English, Slovene and Klingon and the input to the script is the ISO 639-2 language code. We decide to expand the functionality and also allow the input to be case-insensitive name of the language.
+
+```bash
+#!/bin/bash
+case $1 in
+
+  slv)
+    echo "Pozdravljeni!"
+    ;;
+
+  eng)
+    echo "Hello!"
+    ;;
+
+  tlh)
+    echo "nuqneH"
+    ;;
+
+  *)
+    echo "Unsupported language code ($1). Must be one of the following: slv, eng, tlh"
+    ;;
+esac
+```
+
+Execute the script with different input arguments.
+> **Note**: Klingon do not say hello like we do. They don't know have the concept of a social greeting. The word `nuqneH` translates to "What do you want?".
+
+**Intermediate assignment**: Modify the above script so the user can input different kind of strings for the same language. For `slv` this would for example be: `slovenian`, `slovene`, etc. Furthermore, make the words case-insensitive so both `Slovenian` and `slovenian` work.
+
+Hints: In `case` statements the OR condition is defined with `|`. When doing pattern matching, `[...]` will match all characters enclosed in `[` and `]`.
+
+
+> Further reading:
+> - https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Pattern-Matching
+> - https://linuxize.com/post/bash-case-statement/
+
+<!-- Hidden information -->
+<!-- The content in this page wsdaas inspired by: -->
+<!-- https://linuxize.com/post/bash-case-statement/ -->
+
+### The `for` and `while` loops
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
-<!-- https://linuxize.com/post/bash-case-statement/ -->
-## Input parameters
+<!-- https://linuxize.com/post/bash-while-loop/ -->
+#### The `while` loop
+
+The `while` statement is used to perform a loop as long as a provided condition is true. The syntax is the following:
+```bash
+while CONDITION
+do
+  COMMANDS
+done
+```
+
+The best way to see how this work is with an example. Prepare a file and call it `while_loop.sh` and make it executable. Type the following few lines into the file using `nano`:
+```bash
+#!/bin/bash
+i=0
+
+while [[ $i -le 2 ]]
+do
+  echo i: $i
+  ((i++))
+done
+```
+> **Note**: The double parenthesis `((...))` is a built-in arithmetic feature of Bash. It is used to perform integer arithmetic operations and can be used without `$` to access variables.
+
+Execute the file and observe the output:
+```
+$ ./while_loop.sh
+i: 0
+i: 1
+i: 2
+```
+#### The `for` loop
+The `for` statement is used to construct a loop that iterates through an array. The syntax is the following:
+```bash
+for item in LIST
+do
+  COMMANDS
+done
+```
+The best way to learn something is to try an example. Let's say we are a university professor and we want to fairly grade the students that took our very unpopular course.
+```bash
+#!/bin/bash
+brave_students=(John Jack Jane Jolene)
+for idx in {0..3..1}
+do
+    echo "Dear ${brave_students[$idx]},"
+    echo "You finished the course with the following grade: 5. You will have to repeat the course."
+    echo "¯\_(ツ)_/¯"
+    echo ""
+done
+```
+> **Note**: You see the following structure: `{0..3..1}`. What this expression defines a sequence of integers. It has the following syntax: `{START..END..INCREMENT}`.
+
+It is also possible to loop through the elements of an array directly. To achieve this, we rewrite the above for loop to the following:
+```bash
+#!/bin/bash
+brave_students=(John Jack Jane Jolene)
+for student in ${brave_students[@]}
+do
+    echo "Dear $student,"
+    echo "You finished the course with the following grade: 5. You will have to reat the course."
+    echo "¯\_(ツ)_/¯"
+    echo ""
+done
+```
+
+Another feature of the for loops is that it also allows C-style syntax: `((INITIALIZATION; TEST; STEP))`. For example
+```bash
+#!/bin/bash
+for ((i = 0 ; i <= 5 ; i++)); do
+  echo "Value of i is $i"
+done
+```
+
+
+> Further reading:
+> - https://linuxhint.com/bash_arithmetic_operations/
 
 ### Function definition
-<!-- Hidden information -->
-<!-- The content in this page was inspired by: -->
-<!-- https://linuxize.com/post/bash-functions/ -->
+
+Bash allows us to define functions too (how cool is that, huh?). This allows us to make our scripts more readable and help us avoiding writing the same lines of code over and over again.
+
+The basic syntax is as follows:
+```bash
+function_name () {
+  COMMANDS
+}
+```
+You are probably wondering "How do we define function arguments?". The answer is simple: you don't. Functions work the same way as any other Bash command when it comes to input arguments. You don't need to define, simply use them in the order they are provided.
+
+As usual, the best way to learn something is to trying it out. So we are going to write the following script (make it executable) into a file called `use_function.sh`:
+```bash
+#!/bin/bash
+
+print_args () {
+   echo "This text comes from the print_args function."
+   echo "These are the provided arguments:"
+   for arg in "$@"
+    do
+        echo -e "\t\t\t\t - $arg"
+    done
+
+}
+
+print_args sometext somemoretext number1 number2
+```
+
+> Further reading:
+> - https://linuxize.com/post/bash-functions/
+
+## Assignment
+
+You are a professor at a multi-planetary university and among your courses there is also one called "The Social Impacts of the Linux Operating System in the 22nd Century". The students coming to your classes are from France, Ireland, USA, and Kronos (Klingon home world). It's the time of the finals and you asked your assistant to collect the grades of the students. You instructed your assistant to prepare a CSV (comma separated values) file where the names, grades, preferred language in ISO and other comments are written in an orderly fashion. The assistant gave you the following file (the extra empty line at the end is mandatory, see [https://www.iso.org/obp/ui/#iso:std:iso-iec:9899:ed-3:v1:en](https://www.iso.org/obp/ui/#iso:std:iso-iec:9899:ed-3:v1:en)):
+```
+Miles O'Brien,84,gle,Try to tune down the chatter
+Worf Rozhenko,76,tlh,Has a temper.
+Jean-Luc Picard,100,fra,Getting bald but it fits the character. Keep it up.
+Beverly Crusher,93,eng,
+
+```
+Your class currently has only 4 students but it seems that it was very popular so you expect a lot of students next year. You want to write a script that generates text in the students' native language informing them of their grade (passing criteria is 50/100) and adds comments from the assistant.
+
+Hints:
+ - The `cut` command can cut out a single piece of data from a string with a specified delimiter: `cut -d , -f 1`.
+ - The `tr` (translate) command can be used to replace one character with another: `tr ' ' '_'`.
+ - It is possible to pipe a file into the while loop with the following syntax:
+ ```bash
+while read -r line; do
+  COMMANDS
+done < /path/to/file
+ ```
+ - The `head -n <number>` command outputs the number of lines specified by `<number>` from top to bottom.
+ - The `tail -n <number>` command outputs the the number of lines specified by `<number>` from bottom to top.
