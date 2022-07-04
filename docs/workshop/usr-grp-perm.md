@@ -262,7 +262,7 @@ In this exercise you will be creating an environment of directories for your nei
 
 1. In the root path (`/`) create a directory called `neighborhood`
 2. Create a new user with `adduser` for the person sitting next to you (let them chose their own password)
-3. In the directory dedicated to the neighborhood you should create three different directories and adjust their permissions accordingly:
+3. In the directory dedicated to the neighborhood, you should create three different directories and adjust their permissions accordingly:
    1. bulleting board - everyone can read but only certain people in the neighborhood can write
    2. share files - each neighbor has their own directory in which they can read and write as they please. Other people are able to only read.
    3. administration - only the neighborhood administrators can write and read in this directory

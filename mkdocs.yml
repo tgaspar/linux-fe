@@ -17,10 +17,11 @@ nav:
       - The command line: 'workshop/command-line.md'
       - Filesystem and navigation: 'workshop/filesystem-and-navigation.md'
       - Users, groups and permissions: 'workshop/usr-grp-perm.md'
-      - Pipes, Redirects and scripts: 'workshop/shell-scripting.md'
+      - Pipes, redirects and File editing: 'workshop/piping-text-editing.md'
       - Process management: 'workshop/process-management.md'
       - Remote access: 'workshop/remote-access.md'
-      - Text editing : 'workshop/git-and-apt'
+      - Installing new tools : 'workshop/git-and-apt'
+      - Shell scripts: 'workshop/shell-scripting.md'
     - Final Assignment: 'practical/index.md'
     - Additional knowledge: 'additional/index.md'
 theme:
