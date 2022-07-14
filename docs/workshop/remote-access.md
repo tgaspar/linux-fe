@@ -92,29 +92,64 @@ where:
 In our case, the value `0.0` instructs the X client to send the window data to the X server running on our machine (`localhost`), on the first display and the first screen. Let's connect back to the remote server and set these values to the exact same:
 
 ```
-$ export DISPLAY=0.0
+$ export DISPLAY=:0.0
 ```
 
-and start `gedit`. What happened?
+and start `gedit`. What happened? You probably did not see much on your screen except that `gedit` no longer outputs errors. But your neighbor is probably surprised that there's suddenly a window opened. By setting the `DISPLAY` environment variable to `:0.0` you instructed the remote host to open GUI applications locally.
+
+Some curious minds probably already started wondering: "Can we make a remote server forward the GUI to our machine"? The answer is clearly yes! And this is easier than one would think. We can instruct `ssh` to forward the X server data to the remote machine. To try this, log out of the remote machine (`Ctrl + D`) and log back in with the `-Y` flag:
+
+```
+$ ssh -Y USERNAME@IP_ADDRESS
+```
+
+Try running `geddit` again and see it open on your screen.
+
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!-- https://askubuntu.com/a/432257 -->
 ## File transfer
 
-### `scp`
+With SSH we learned how to connect to the remote machine's terminal and execute commands there. In this section we will learn how to transfer files from one machine to the other. This is rather useful when developing robotics applications as we sometimes want to copy larger data from a robot onto our local machine for further analysis.
+
+In the previous part of the workshop we learned how to copy files with the `cp` command. To transfer files between two machines we can use something called `S`ecure `C`o`p`y or better, the `scp` command. This command has the similar syntax to the `cp` command but it requires some more information. The syntax is always following the pattern: copy from and paste it to. Let's learn how to use it.
+
+First, we navigate into the `~/Documents` directory and create a simple file with some content:
+```
+$ echo "Hello neighbor" > message.txt
+```
+
+and then we send it to machine of our neighbor. We will do a secure copy (`scp`) of the `message.txt` file to our neighbor's machine `USERNAME@IP_ADDRESS` in the `~/Documents` directory:
+```
+$ scp message.txt USERNAME@IP_ADDRESS:~/Documents
+```
+
+You can now use `ssh` to login to the remote machine and inspect if the file really is there.
+
+We will now copy the same file from the remote machine into the `~/Documents` directory on our machine. However, we first delete the file on our machine so it is not present in the `~/Documents` directory using `rm`. We proceed with:
+```
+$ scp USERNAME@IP_ADDRESS:~/Documents/message.txt ~/Documents/
+```
+
+You can now inspect the the contents of the `~/Documents` directory and you will find the `message.txt` file we copied from our neighbor.
+
+
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!-- https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/ -->
 
-## SSH keys and encryption
-What if we would want to avoid providing the password each time we log in into a remote server?
+<!-- ## SSH keys and encryption -->
+<!-- What if we would want to avoid providing the password each time we log in into a remote server? -->
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!-- https://linuxize.com/post/how-to-set-up-ssh-keys-on-ubuntu-1804/ -->
 ### Exercise:
-1. Log into the computer of your neighbor.
+> To be defined
+<!-- 1. Log into the computer of your neighbor.
 2. Run a program with a GUI so you see it on your computer
-3. Run a program with a GUI so they see it on their computer
+3. Run a program with a GUI so they see it on their computer -->
 
 > **Further reading**:
-> * https://en.wikipedia.org/wiki/Public-key_cryptography
+> * https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files
+> * https://linuxize.com/post/how-to-set-up-ssh-keys-on-ubuntu-1804/
+> * https://www.ssh.com/academy/ssh/tunneling/example
