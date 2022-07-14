@@ -79,6 +79,7 @@ This tells us, that when we typed `$filename_new.txt` Linux understood that we'r
 $ filename="very_important_document"
 $ touch $"filename"_new.txt
 ```
+
 Using `ls` will show us that the file has finally been created. Yay!
 
 > **Note**: It is also possible to use curly braces  `{}` instead of the quotation marks. This also opens various possibilities like specifying a default value in case the variable is not defined - `${filename:-not_so_important_document}`. Useful when writing scripts

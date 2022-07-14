@@ -148,3 +148,6 @@ $ bring-me-coffee
 ```
 
 After reading this you're probably asking yourself: "How will this bring me coffee?". We never promised you coffee, we said that we want Bash to recognize the command ¯\\\_(ツ)\_/¯.
+
+A relevant XKCD comic at the end: https://xkcd.com/456/
+![XKCD on Linux](../assets/images/man-pages.png)

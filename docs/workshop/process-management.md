@@ -99,18 +99,114 @@ Try running `gedit` and then press `Ctrl+Z`. You will see the following:
 ^Z
 [1]+  Stopped                 gedit
 ```
-It says that `gedit` is stopped. However, you still see its GUI. The GUI is visible, but we cannot type anything in it. That is because the process is stopped (not terminated!). A person that does not know what is going on could panic a bit because the program is not responding and we've already wrote some important things into it. No reason to panic! We can now resume the program
+It says that `gedit` is stopped. However, you still see its GUI. The GUI is visible, but we cannot type anything in it. That is because the process is stopped (not terminated!). A person that does not know what is going on could panic a bit because the program is not responding and we've already wrote some important things into it. No reason to panic! We can now resume the program with the `bg` command. This will instruct Linux to put `gedit` into the background and resume it. This is the same behavior we've seen when starting a process with a `&` at the end. As you can see, we can again interact with `gedit` and type things into our file.
+
+If we now want to bring the process back into the foreground, we simply type `fg`.
+
 > Further reading:
 > - https://linux.die.net/Bash-Beginners-Guide/sect_12_01.html
 > - https://medium.com/@aantipov/what-happens-when-you-ctrl-c-in-the-terminal-36b093443e06
 
 ## Killing processes in the background
+
+Sometimes there are processes running in the background that were not started by us or they were started in a different terminal. In those cases, we cannot access them by by `fg` and simply stop them with a `Ctrl+C`.
+
+Before proceeding, start `gedit` with the trailing `&` so you put it runs in the background:
+```
+$ gedit &
+```
+Now close the terminal and open it again. Type `fg`, what do you see?
+```
+$ fg
+-bash: fg: current: no such job
+```
+
 ### Using `ps` and `kill`
+
+In the previous section we mentioned something called the "Process ID" or PID. The PID is a unique identifier of a process. To retrieve the PID of a process we can use the `ps` command. Try it out:
+```
+$ ps
+  PID TTY          TIME CMD
+ 3683 pts/7    00:00:00 bash
+ 3978 pts/7    00:00:00 ps
+```
+The `ps` command listed `bash` and `ps` as currently running processes. The first, `bash` is obvious as it is the current program on the operating system that processes the all the commands we provide it through the terminal. The second, `ps`, is the result of us running `ps` when listing all the running processes. Obviously, we started `ps` to list all the running processes and it identified itself as a running process.
+
+For each process we see the following information:
+- `PID` - the PID of the process
+- `TTY` - the name of the terminal the process was started in
+- `TIME` - the total accumulated CPU utilization time for a particular process
+- `CMD` - the command that started the process
+
+Question: Do you think these really are all the processes that are currently running? Where is `geddit` that we started before?
+
+Let's try to provide `ps` some more flags and see a bit richer output:
+```
+$ ps -A
+```
+Now you are probably overwhelmed by the output! Do you see the `geddit` process anywhere?
+
+> **Note**: Remember `grep`! Use `ps ax | grep gedit`.
+
+The added `-A` flag means the following: `all processes` (type `ps --help a` to see some other options).
+
+Have a close look at `gedit`, what do you see in the `TTY` column? A question mark `?` denotes, that the terminal that started that process is no longer available or does not exist.
+
+We can now terminate `gedit` with the `kill` command. The kill command sends a signal to a job. The default signal that `kill` sends to a process is `SIGTERM` (this is not the same signal that `Ctrl+C` sends). If a process is stuck, it might not react to `SIGNTERM` so you might want to use a more forceful signal, like `SIGKILL` (or `-s 9` when used with `kill`).
+
+To terminate `gedit` simply run `kill` with `gedit`'s PID
+```
+$ kill <GEDIT_PID>
+```
+
+### Intermediate exercise
+
+Start `gedit` in the background (`gedit &`). Use multiple commands to terminate `gedit` without manually typing its PID. Use `grep`, `tr` and `cut`.
+
+Solution:
+```
+$ kill $(ps -A | grep gedit | tr -s ' ' | cut -d ' ' -f 2)
+```
+> Further reading:
+> - https://www.cyberciti.biz/faq/unix-kill-command-examples/
+> - https://man7.org/linux/man-pages/man7/signal.7.html
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!-- https://linuxize.com/post/ps-command-in-linux/ -->
 
 ### Using `htop`
+We all love the command line and stacking multiple commands together to achieve the desired result is comparable to drinking some very fine wine. However, it sometime is a little bit time consuming and we can quickly forget the different tricks we used. That is why it is advised to sometimes also use tools that make our lives easier.
+
+To monitor currently running processes we can also use `htop`. This program is not always available so we might need to install it first:
+```
+$ apt install `htop`
+```
+
+After starting `htop` you are greeted with its Command Line Interface - CLI.
+```
+$ htop
+```
+The CLI looks something like this (image credits to [https://htop.dev](https://htop.dev)):
+![htop](../assets/images/htop.png)
+
+With `htop` you can sort processes based on the resources they use (e.g. memory or processor), filter processes based on names, search processes, and also terminate them. To exit htop we can either use `Ctrl+C` or simply press the `q` key. Let's do just that, quit `htop`.
+
+To demonstrate how `htop` can be used to terminate a process, we will start `gedit` in the background again:
+```
+$ gedit &
+```
+Open `htop`. Read the lines at the bottom that state:
+`F1 Help`, `F2 Setup`, `F3 Search`, `F4 Filter`, `F5 Sorted`, `F6 Collap`, `F7 Nice -`, `F8 Nice +`, `F9 Kill`, `F10 Quit`
+
+We press the `F4` key to `filter` the processes, then type `gedit` and then press the `Enter` key to confirm the search pattern. We will likely see multiple lines. Best is, to terminate all of them! Simply press the `Space` key and you will see that the first line was selected. Press `Space` again until all lines are selected and then press the `F9` key. On the side you will see a list of signals you can send to the process. To kill it, send `SIGKILL` by selecting it with the `9`. Confirm the selection with the `Enter` key.
+### Intermediate exercise
+
+Start `htop` in the foreground and then do the following:
+- Place `htop` in the background
+- Start `gedit` in the background
+- Place `htop` in the foreground again
+- Kill `gedit`
+
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!-- https://spin.atomicobject.com/2020/02/10/htop-guide/ -->
