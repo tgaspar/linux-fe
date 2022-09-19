@@ -1,4 +1,3 @@
-# About
+# About this document
 
-This workshop is organized by the Laboratory of Robotics at the Faculty of Electrical Engineering, University of Ljubljana.
-
+This document was written to be used during a live class with a presenter.

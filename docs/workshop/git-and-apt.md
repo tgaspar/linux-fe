@@ -35,7 +35,8 @@ Get:1 http://archive.ubuntu.com/ubuntu bionic/universe amd64 sl amd64 3.03-17bui
 
 This gives you the exact location where the program was installed from. Each program listed in the official Ubuntu repositories. When we install something with `apt-get` it's not only the program that we wanted that gets installed but also all the dependencies. That is why we can be safe that when using `apt-get` that not only we are probably not installing malware, but our program will be working the moment we install it. The links to these repositories are written in `/etc/apt/sources.list` and you can easily look at them. Moreover, it is possible to instruct Linux to also look in other repositories when installing new programs by adding the definitions to `/etc/apt/sources.list.d/` (e.g. ROS repositories, see [http://wiki.ros.org/melodic/Installation/Ubuntu](http://wiki.ros.org/melodic/Installation/Ubuntu)).
 
-> Further reading:
+> **Further reading**:
+>
 > - https://sources.debian.org/
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->

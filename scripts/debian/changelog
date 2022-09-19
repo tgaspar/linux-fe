@@ -1,0 +1,308 @@
+cowsay (3.03+dfsg2-8) unstable; urgency=low
+
+  * Fix capitalization of man page title as per man-pages(7)
+  * Bump Standards-Version to 4.5.0
+  * Bump debhelper compat to 13
+  * Clear up various lintian errors
+
+ -- James McDonald <james@jamesmcdonald.com>  Mon, 11 May 2020 08:43:49 +0200
+
+cowsay (3.03+dfsg2-7) unstable; urgency=medium
+
+  * New maintainer (closes: #910035)
+  * Fix lintian warning about spelling of 'balloons' in patch
+  * Add fox cow (closes: #888229)
+  * Bump Standards-Version to 4.4.1
+  * Bump debhelper compat to 12
+
+ -- James McDonald <james@jamesmcdonald.com>  Mon, 28 Oct 2019 09:43:46 +0100
+
+cowsay (3.03+dfsg2-6) unstable; urgency=medium
+
+  * QA upload.
+  * Add kangaroo cow (closes: #700576).
+
+ -- Paul Hardy <unifoundry@unifoundry.com>  Sun, 03 Feb 2019 09:39:28 -0800
+
+cowsay (3.03+dfsg2-5) unstable; urgency=medium
+
+  [ Tony Maillefaud ]
+  * Remove controversial cows from cowsay-off
+
+  [ Francois Marier ]
+  * Move VCS fields to salsa
+  * Bump debhelper compat to 11
+  * Use HTTPS copyright URL in debian/copyright
+  * Bump copyright years in debian/copyright
+  * Orphan the package at Tony's request (see #910035)
+
+ -- Francois Marier <francois@debian.org>  Mon, 01 Oct 2018 10:48:07 -0700
+
+cowsay (3.03+dfsg2-4) unstable; urgency=medium
+
+  * Cowsay-off
+   - Use suggests field instead of Recommends (closes: #882085)
+  * Change standards-version (4.1.1)
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Wed, 22 Nov 2017 18:17:38 +0100
+
+cowsay (3.03+dfsg2-3) unstable; urgency=high
+
+  * Update Depends, Replaces and Breaks version
+   - bong and beavis owned by cowsay and cowsay-off (closes: #851552)
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Mon, 16 Jan 2017 21:23:47 +0100
+
+cowsay (3.03+dfsg2-2) unstable; urgency=medium
+
+  * Move bong.cow and beavis.zen.cow to cowsay-off package (closes: #851181)
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Sat, 14 Jan 2017 09:00:10 +0100
+
+cowsay (3.03+dfsg2-1) unstable; urgency=medium
+
+  * Remove cows (meow and kitty)
+   - unclear licensing (closes: #367347, #592917)
+  * Add NEWS file (closes: #842801)
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Tue, 27 Dec 2016 11:00:59 +0200
+
+cowsay (3.03+dfsg1-16) unstable; urgency=medium
+
+  * Fix typo (closes: #819774)
+  * Change standards-version (3.9.8)
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Tue, 24 May 2016 11:00:59 +0200
+
+cowsay (3.03+dfsg1-15) unstable; urgency=high
+
+  * Add libtext-charwidth-perl Depends (closes: #819115)
+  * Change standards-version (3.9.7)
+  * Use secure vcs-git
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Tue, 29 Mar 2016 21:29:49 +0200
+
+cowsay (3.03+dfsg1-14) unstable; urgency=medium
+
+  [ Tony Maillefaud ]
+  * Add patch 03-ansi_code_width_color_widechar.patch
+   - Good output format with widechar (closes: #769565)
+   - Ignore ANSI codes when determining message width (LP: #10270033)
+   - Good output with ANSI colour (LP: #1437804)
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Thu, 10 Dec 2015 09:17:59 +0100
+
+cowsay (3.03+dfsg1-13) unstable; urgency=medium
+
+  [ Tony Maillefaud ]
+  * Add cowsay-off package (closes: #769194)
+
+  [ Francois Marier ]
+  * Update VCS-Browser URL
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Tue, 06 Oct 2015 10:28:17 +0200
+
+cowsay (3.03+dfsg1-12) unstable; urgency=medium
+
+  [ Tony Maillefaud ]
+  * Adopt this package (closes: #777101)
+
+  [ Francois Marier ]
+  * Run wrap-and-sort
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Thu, 03 Sep 2015 12:19:13 +0200
+
+cowsay (3.03+dfsg1-11) unstable; urgency=medium
+
+  [ Solveig ]
+  * Update upstream URL in debian/control (closes: #796580)
+
+  [ Francois Marier ]
+  * Remove watch file
+  * Update upstream URL in debian/copyright
+
+ -- Francois Marier <francois@debian.org>  Sat, 25 Apr 2015 22:29:52 +1200
+
+cowsay (3.03+dfsg1-10) unstable; urgency=medium
+
+  * Bump Standards-Version up to 3.9.6
+  * Switch to a machine-readable copyright file
+
+ -- Francois Marier <francois@debian.org>  Thu, 18 Sep 2014 22:25:00 +1200
+
+cowsay (3.03+dfsg1-9) unstable; urgency=medium
+
+  * Remove upstream's GPG key since it's not valid in GPG2
+
+ -- Francois Marier <francois@debian.org>  Wed, 16 Jul 2014 12:10:14 +1200
+
+cowsay (3.03+dfsg1-8) unstable; urgency=medium
+
+  * Fix "homepage" URL
+  * Remove tab characters from cow files (closes: #742286)
+
+ -- Francois Marier <francois@debian.org>  Sat, 22 Mar 2014 11:10:21 +1300
+
+cowsay (3.03+dfsg1-6) unstable; urgency=low
+
+  * Fix watch file and add upstream's GPG key
+  * Bump Standards-Version up to 3.9.5
+  * Use canonical VCS URLs in debian/control
+
+ -- Francois Marier <francois@debian.org>  Sat, 01 Feb 2014 22:32:38 +1300
+
+cowsay (3.03+dfsg1-4) unstable; urgency=low
+
+  * Add a cowsay_random script under examples/
+  * Switch to a minimal debian/rules file
+  * Fix lintian warning about article in short description
+  * Bump debhelper compatibility to 9
+  * Bump Standards-Version to 3.9.3
+
+ -- Francois Marier <francois@debian.org>  Mon, 28 May 2012 15:08:39 +1200
+
+cowsay (3.03+dfsg1-3) unstable; urgency=low
+
+  * Add ponies, thanks to Nick Daly (closes: #575317)
+  * Bump debhelper compatibility to 8
+
+ -- Francois Marier <francois@debian.org>  Wed, 22 Dec 2010 13:50:20 +1300
+
+cowsay (3.03+dfsg1-2) unstable; urgency=medium
+
+  * Update Rhonda's copyright statement on cows/gnu and cows/suse
+
+ -- Francois Marier <francois@debian.org>  Sat, 21 Aug 2010 00:42:31 -0400
+
+cowsay (3.03+dfsg1-1) unstable; urgency=medium
+
+  * Removed cows from unknown artists and added authors of contributed
+    cow files to debian/copyright (closes: #592917, #367347)
+  * Mangle the debian version in the watch file
+  * Bump Standards-Version up to 3.9.1
+
+ -- Francois Marier <francois@debian.org>  Wed, 18 Aug 2010 10:30:42 -0400
+
+cowsay (3.03-11) unstable; urgency=low
+
+  * Fix tongue alignment problem in head-in cow. Thanks to Xin Ouch.
+
+ -- Francois Marier <francois@debian.org>  Wed, 16 Jun 2010 09:56:12 +1200
+
+cowsay (3.03-10) unstable; urgency=low
+
+  * Adopt this package (closes: #579367)
+  * Acknowledge NMUs
+    (closes: #480404, #480405, #452816, #367310, #404287)
+  * Add snowman cow (closes: #561531)
+  * Partial fix for UTF-8 messages (closes: #254557, LP: 393212)
+
+  * Move all customisations to separate DEP-3 patches
+  * Add vcs-git fields
+  * Bump Standards-Version up to 3.8.4
+  * Bump debhelper compatibility to 7
+  * Move to 3.0 (quilt) source package format
+
+ -- Francois Marier <francois@debian.org>  Wed, 28 Apr 2010 16:34:32 +1200
+
+cowsay (3.03-9.2) unstable; urgency=low
+
+  * NMU to fix breakages introduced with last NMU.
+  * Make duck.cow work with unstable version
+    (Closes: #480404, #480405, #452816)
+  * Added some long standing cow files:
+    - gnu.cow and suse.cow (Closes: #367310)
+    - calvin.cow and cock.cow (Closes: #404287)
+  * filters lowered to suggests, there is no special functionality that would
+    require filters, it's just a nice-to-have.
+  * Some changes missing from the former NMU entry: Small fixes in the manual
+    page, Standards-Version bumped to 3.7.3.
+  * Actually bump Standards-Version to 3.8.0.
+  * Fixed watch file to make it watch again.
+
+ -- Gerfried Fuchs <rhonda@debian.at>  Mon, 21 Jul 2008 12:52:24 +0200
+
+cowsay (3.03-9.1) unstable; urgency=low
+
+  * Non-maintainer upload. (Closes: #452816)
+  * Move homepage field.
+  * Add recommnds for filters.
+  * Move manual page to games section and binaries to /usr/games.
+
+ -- Gurkan Sengun <gurkan@phys.ethz.ch>  Wed, 16 Apr 2008 08:41:50 +0200
+
+cowsay (3.03-9) unstable; urgency=low
+
+  * debian/control:
+    - new maintainer (Closes: #406507)
+    - fix typo (Closes: #398484)
+    - bumped Standards-Version
+  * Switch to debhelper 5
+  * cowsay.1: remove stray '(' (Closes: #352904)
+  * debian/copyright: updated
+
+ -- Franz Pletz <fpletz@franz-pletz.org>  Sat, 28 Jul 2007 21:35:42 +0200
+
+cowsay (3.03-8) unstable; urgency=low
+
+  * debian/watch: added
+
+ -- Florian Ernst <florian@debian.org>  Mon,  9 Jan 2006 15:02:56 +0100
+
+cowsay (3.03-7) unstable; urgency=low
+
+  * New maintainer, many thanks to Michael D. Ivey for his work, taking
+    over with his consent
+    - use debhelper 4 mode and ${perl:Depends}
+  * Remove bad mech-and-cow file (Closes: #327872)
+  * Trim trailing spaces to allow for better use for signatures
+    (Closes: #276144)
+  * Add new sheepy cowfile (Closes: #326063)
+  * Standards-Version 3.6.2
+  * Acknowledge previous NMU that actually was a MU by including it
+
+ -- Florian Ernst <florian@debian.org>  Wed, 19 Oct 2005 16:51:22 +0200
+
+cowsay (3.03-6) unstable; urgency=low
+
+  * Added reversal patch for elephant-in-snake (Closes: #190455)
+    Thanks to D. Joe Anderson ... although I have no clue what
+    this cow is supposed to be.
+  * Added patch from Thom May for mech-and-cow (Closes: #193440)
+  * Fixed typo in luke-koala (Closes: #203648)
+  * Updated package description (Closes: #209662)
+  * Bump standards-version
+
+ -- Michael D. Ivey <ivey@debian.org>  Sat, 15 Nov 2003 16:18:04 +0000
+
+cowsay (3.03-5) unstable; urgency=low
+
+  * Added maxlength patch from Jeronimo Pellegrini (Closes: #165218)
+
+ -- Michael D. Ivey <ivey@debian.org>  Mon,  9 Dec 2002 18:13:47 +0000
+
+cowsay (3.03-4) unstable; urgency=low
+
+  * Added apt.cow from Steven Barker (Closes: #143810)
+
+ -- Michael D. Ivey <ivey@debian.org>  Mon, 22 Apr 2002 17:45:57 +0000
+
+cowsay (3.03-3) unstable; urgency=low
+
+  * New standards version
+  * Changed description (Closes: #97193)
+
+ -- michael d. ivey <ivey@debian.org>  Tue, 29 May 2001 21:56:35 +0000
+
+cowsay (3.03-2) unstable; urgency=low
+
+  * Added URL into debian/copyright
+
+ -- michael d. ivey <ivey@debian.org>  Tue, 29 May 2001 19:35:48 +0000
+
+cowsay (3.03-1) unstable; urgency=low
+
+  * Initial Release.
+  * Closes: #75450
+
+ -- michael d. ivey <ivey@debian.org>  Wed,  9 May 2001 20:37:08 +0000

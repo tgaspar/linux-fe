@@ -6,6 +6,21 @@ Tadaaah, we are welcomed by a friendly beaver:
 ![Linux desktop](../assets/images/linux-desktop.png)
 
 Sadly, we are going back to the terminal. This time, however, we are going to do it within the desktop environment. To open up the terminal you press the following keys: `Ctrl+Alt+T`. We can now proceed with the next chapter of this workshop.
+
+## Tips and tricks within the Ubuntu desktop environment
+
+There are a tricks that one should know when working with the Ubuntu desktop environment. We will go through this briefly but you can always look back into here for reference.
+### The clipboard
+
+We can do the copy-paste operation without pressing any keys on the keyboard. By simply selecting a certain text with our cursor (i.e. mouse) and then pressing the **left mouse button**, the text will go into the clipboard. To paste it, we press the **middle mouse button**. Additionally, text can be pasted also with the `Shift + Insert` key combination.
+
+### Settings
+
+To access the general operating system settings we click on the top-right down-pointing triangle and then clicking on the wrench-screwdriver looking icon:
+
+![The settings button is on the left](../assets/images/ubuntu-settings.png)
+
+### Quick
 ## Navigation & exploration
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
@@ -21,6 +36,7 @@ We start this by looking around:
 $ ls
 Documents  examples.desktop  Music  Public  Desktop  Downloads  Pictures  Templates  Videos
 ```
+
 The `ls` command listed something. What did it list?
 
 That's right, these are all (non-hidden) directories. However, **where** are all of these directories? Where are we?! Let's find this out by `p`rinting the `w`orking `d`irecotry - `pwd`:
@@ -28,6 +44,7 @@ That's right, these are all (non-hidden) directories. However, **where** are all
 $ pwd
 /home/user
 ```
+
 Helpful, right? We explain what this directory is in one of the chapters below. For now, let's try to move into one of the directories that we saw before:
 
 ```
@@ -57,6 +74,22 @@ You invoked the `ls` command in the root directory of the operating system - `/`
 
 ![Linux file system topology (Credit: Linux.com)](../assets/images/linux-topology.png)
 
+### Notable directories
+
+#### `/home`
+
+The `/home` directory contains the home directories of all of the "human" users on the operating system. For instance, if we are sharing the computer with another user, their home directory will be `/home/another-user`.
+
+#### `/opt`
+
+This is directory where the optional software application files are found. For instance, if we follow the instructions how to install Zoom it will eventually create the relevant binary files in the `/opt/zoom` directory.
+
+> **Note**: Also the Robot Operating System (ROS) is installed in `/opt`. Depending on the distribution, for `melodic` it's installed in `/opt/ros/melodic`.
+
+#### `/dev`
+
+The `/dev` directory is used to contain all the device files. These are not "files for the devices". No, these are devices represented as files. Everything is a file in Linux, even devices. When working with robots, we often plug USB cameras into our computer. These cameras are typically represented as `/dev/video0` (the `0` depends on how many cameras there are).
+
 ## File manipulation
 
 <!-- Hidden information -->
@@ -68,11 +101,13 @@ Let us now work with files (finally, huh?)! We will start by creating a simple a
 ```
 $ touch file
 ```
+
 If nothing majorly went wrong, you can see the file by listing the contents of the directory:
 ```
 $ ls
 file
 ```
+
 We can now make a copy of this file and call it `file2` with the `c`o`p`y command - `cp`:
 ```
 $ cp file file1
@@ -84,17 +119,20 @@ We can again inspect the contents of the directory:
 $ ls
 file  file2
 ```
+
 Good! We now have too files. By the way, you should also be able to see these two files on your desktop. If not, you're probably in the wrong directory!
 
 We now have two files, `file` and `file2`. That's not too pretty and neither is it consistent. What if we want to have `file1` and `file2`? Simple! We will `m`o`v`e `file` into `file1` with the `mv` command:
 ```
 $ mv file file1
 ```
+
 Invoking the `ls` command:
 ```
 $ ls
 file1  file2
 ```
+
 Ahhh, much better!
 
 Create a new file and give it a very random name. For instance, `aksdjasdjasd`:
@@ -107,10 +145,12 @@ List all the files in the directory and lay your eyes on your newly created abom
 $ ls
 file1  file2  aksdjasdjasd
 ```
+
 We should clear it up, right? Let's `r`e`m`ove the file with the `rm` command:
 ```
 $ rm aksdjasdjasd
 ```
+
 If you now list the files in this directory you will see that order was restored. Hooraay!
 
 ### Auto-completion with the `Tab` key
@@ -128,19 +168,23 @@ We can `m`a`k`e a new `dir`ectory with the `mkdir` command:
 ```
 $ mkdir directory
 ```
+
 Again, we inspect the content of our working directory and see
 ```
 $ ls
 directory  file1  file2
 ```
+
 We can now move into the newly created directory called `directory`:
 ```
 $ cd directory
 ```
+
 Since this directory has just been created, we won't be listing it's contents. It's empty. However, let's step back into the directory we came from:
 ```
 cd ..
 ```
+
 > **Note**: The `..` represents one directory before the current working directory. It can be used with all Linux commands, like `ls ..`.
 
 We should now try to create a directory within a directory. Let's inspect the help of `mkdir`:
@@ -165,16 +209,19 @@ Report mkdir translation bugs to <http://translationproject.org/team/>
 Full documentation at: <http://www.gnu.org/software/coreutils/mkdir>
 or available locally via: info '(coreutils) mkdir invocation'
 ```
+
 There it is! It's the `-p` flag!
 
 ```
 $ mkdir -p parent/child
 ```
+
 Inspecting the contents of the `parent` directory reveals that `child` was created too:
 ```
 $ ls parent
 child
 ```
+
 > **Note**: Without `-p` the above command would fail with the following error: `mkdir: cannot create directory ‘parent/child’: No such file or directory`.
 
 ### Directories with spaces
@@ -185,16 +232,19 @@ Make sure you are in the `~/Desktop` working directory:
 ```
 $ cd ~/Desktop
 ```
+
 From here, try to navigate to our newly created `dir with space` directory:
 ```
 $ cd dir with space
 ```
+
 Does it work? Of course not.
 
 For this to work, we need to use escape characters. The reason behind this is, that otherwise `cd` simply things you are feeding it (in this case) 3 different arguments: `dir`, `with` & `space`. In Linux, `\` is the escape character. Let's try to use it:
 ```
 $ cd dir\ with\ space
 ```
+
 Worked like charm!
 
 ## Exercise

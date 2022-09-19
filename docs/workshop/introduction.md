@@ -15,4 +15,4 @@ For the purpose of this workshop we have created a bootable USB drive with Ubunt
 
 - Have a good look at it
 - Say good bye to it
-- Press `Ctrl+Alt+F1`
+- Press `Ctrl + Alt + F1`

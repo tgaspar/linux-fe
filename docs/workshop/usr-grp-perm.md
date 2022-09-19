@@ -10,11 +10,12 @@ $ apt install sl
 E: Could not open lock file /var/lib/dpkg/lock - open (13: Permission denied)
 E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
 ```
+
 What the heck?!
 
 ## Super user do - `sudo`
 
-In the two examples above we've learned that not all doors are open and that we can't just go about installing software. Linux in general was built with security in mind. Reading or writing system files or installing new programs is something that not everyone should have the authority to do.
+In the two examples above we've learned that not all doors are open and that we can't just go about installing software. Linux was built with security in mind. Reading or writing system files or installing new programs is something that not everyone should have the authority to do.
 
 I know what you're next question is though: what if this is your computer and if you want to do whatever you please with it? Isn't making mistakes the best way to learn things?!
 
@@ -22,7 +23,10 @@ No worries, you can make mistakes and do whatever you please. Simply tell the Li
 ```
 sudo apt install -y sl
 ```
+
 After you typed your password the program got installed. Great! You now know how to go about restrictions. Is this really safe, though?
+
+> **Note**: You can simply log into the super user with the `sudo su` command. After that, the displayed user is `root`.
 
 ## Permissions
 <!-- Hidden information -->
@@ -64,6 +68,7 @@ We are going to take the `/home` directory from this list and analyze it:
 ```
 drwxr-xr-x   3 root root    4096 Jan 12  2021 home
 ```
+
 - `drwxr-xr-x` - tells us that this is a `d`irectory and lists the permission of users, groups and other:
   - `d` - Informs that the displayed entry is a `d`irectory. This flag can be one of the following:
     - `d` - `d`irectory,
@@ -95,6 +100,7 @@ Let's now have a look at the permissions of your own home directory:
 $ ls -l /home
 drwxr-xr-x  6 user user 4096 Mar 26  2020 user
 ```
+
 As expected, we do have permissions to create directories in our space as we are the owner of this directory and the owner has the following permissions; `dwx` - `r`ead, `w`rite and e`x`ecute.
 
 > **Note**: As you can see, the permission flags for this directory are `rwxr-xr-w`. Pay attention to the last part: `r-w`. What does this mean in terms of privacy? Exactly, by default, just about **anyone** can see the contents of this directory.
@@ -107,17 +113,20 @@ Let's start with creating a simple file in `~` called `secret`:
 ```
 $ touch secret
 ```
+
 If we check check the details of this file we can see it has the following permissions
 ```
 $ ls -l secret
 -rw-rw-r-- 1 user user 0 Jun  5 14:30 secret
 ```
+
 This means, that we, as an owner, can read and write into it. So can everyone else from our group. However, every other user that does not belong to the same group as we, can only read this file. But we don't want that. It's a secret. Only we should be able to read it.
 
 We can change this by `ch`anging the file `mod`e bits with the `chmod` command:
 ```
 $ chmod o-r secret
 ```
+
 If you inspect the permissions of the `secret` file again you will notice a change:
 ```
 $ ls -l secret
@@ -129,6 +138,7 @@ Success! Keep this in mind for later.
 For now, we will provide a cheat sheet for the commands that help you manipulate with permissions. They will come handy later for the exercise.
 
 ### `chmod`
+
 The `chmod` command offers two methods to manipulate with permissions on a single file or directory:
 1. by specifically adding (`+`) or removing (`-`) specific permissions (`rwx`) to the different permission groups (`u`, `g`, `o` or `a`). Examples:
    1. Give everyone (owner, group and others) the permission to read the `secret` file:
@@ -156,6 +166,11 @@ The `chmod` command offers two methods to manipulate with permissions on a singl
    ```
    $ chmod 440 secret
    ```
+
+The image below provides a helpful visualization of how the permission values are calculated from bits (source: [http://www.isaaczarb.com/working-with-linux-permissions/](http://www.isaaczarb.com/working-with-linux-permissions/)):
+
+![Permission bits visualized.](../assets/images/permission-bits.png)
+
 > **Note**: there is a helpful website to help with calculating the permission numbers: [chmod-calculator.com](https://chmod-calculator.com/)
 
 
@@ -175,6 +190,7 @@ We can create groups with `addgroups` command. For the sake of learning, let's c
 ```
 addgroups readers
 ```
+
 We can now start experimenting. Create a directory in `Desktop` called `only-readers`:
 ```
 $ mkdir ~/Desktop/only-readers
@@ -187,16 +203,19 @@ Let's now change the group of this directory and assign permissions of `rwx` to 
 $ chgrp readers only-readers
 $ chmod 070 only-readers
 ```
+
 Repeat the actions from before, i.e. `cd`, `ls`, `touch`. Can you still do it? You can. However, let's now `ch`ange the `gr`oup of the `only-readers` directory:
 ```
 $ chgrp readers only-readers
 ```
+
 Try the `cd`, `ls` and `touch` commands. What's the result?
 
 The reason why you no longer able to do anything there is because this directory's usage is now limited only to the group `readers` and you're not part of it. We can change this, though:
 ```
 $ usermod -a -G readers user
 ```
+
 > **Note**: `-a` stands for `append` and `-G` stands for a list of groups. To know more check the help page - `usermod --help`.
 
 Finally, we again gained power of the `only-readers` directory. Yay!
@@ -211,12 +230,14 @@ Create a user to test things out with the `useradd` command:
 ```
 $ useradd -p 1234 reader
 ```
+
 > **Note**: This is just a demo. Do not use simple passwords as `1234` in your daily life.
 
 Make sure you are in the `~/Desktop` directory and let's now `s`ubstitute `u`sers and log in as `reader`:
 ```
 $ su reader
 ```
+
 We are now looking at the system through the eyes of the `reader` user. Try to create a simple directory on the desktop. Does it work? As expected, it does not. The user `reader` has no business messing around the directories of the `user` user. Let's switch back to the `user` user:
 ```
 $ su user
@@ -239,16 +260,19 @@ Switch back to the `user` and create a file called `secret` in the `only-readers
 ```
 $ touch secret
 ```
+
 Set the permissions so that only the user can do everything:
 ```
 $ chmod 700 secret
 ```
+
 > **Note**: In this case 7 stands for all three bits set to 1: `r`, `w` and `x`.
 
 Finally, change the owner of the file:
 ```
 $ chown reader secrets
 ```
+
 If we try to read certain properties of this file we won't be allowed to:
 ```
 $ ls -l secrets

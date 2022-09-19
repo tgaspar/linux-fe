@@ -32,6 +32,7 @@ Execute the following:
 ```
 $ hello="echo Hello to you!"
 ```
+
 What do you expect to see when executing either `hello` or `$hello` commands?
 ```
 $ $hello
@@ -46,6 +47,7 @@ First, we assign the `name` variable a value:
 ```
 $ name=Linux
 ```
+
 Then we execute the previously learned `echo` command with the desired text:
 ```
 $ echo Hello $name!
@@ -92,6 +94,7 @@ We start with a simple script:
 ```
 $ echo "echo \"This message came from a script\"" > my_script.sh
 ```
+
 > **Note**: `/` is an escape character.
 
 We confirm that the content of this file is as expected:
@@ -99,6 +102,7 @@ We confirm that the content of this file is as expected:
 $ cat my_script.sh
 echo "This message came from a script"
 ```
+
 Question: how do we execute this?
 
 We execute this file by asking `bash` to execute it's contents:
@@ -106,16 +110,19 @@ We execute this file by asking `bash` to execute it's contents:
 $ bash my_script.sh
 This message came from a script
 ```
+
 We noticed, that we are calling all the Linux commands **without** asking `bash` for an interpretation. How can we achieve this with our scripts?
 
 First, we need to make them executable!
 ```
 $ chmod +x my_script.sh
 ```
+
 We can now execute this with:
 ```
 $ ./my_script.sh
 ```
+
 > **Note**: Executing scripts works only by providing their full path. If we put the script elsewhere, we need to run it like `./some/other/directory/my_script.sh`. To make a script accessible from anywhere we can move it to `/usr/local/bin`.
 
 ### Passing arguments to a script
@@ -124,10 +131,12 @@ Input arguments are accessible by the `$` operator. The arguments passed to a sc
 ```
 $ ./my_script.sh one two three
 ```
+
 The `one`, `two` and `three` are accessible with `$1`, `$2` and `$3`, respectively. Open the `my_script.sh` file with `nano` and modify as follows:
 ```bash
 echo This message came from a script. The first three input parameters are $1, $2 and $3.
 ```
+
 Try to execute the script again with the positional arguments `one`, `two` and `three` and observe the output.
 
 > **Note**: The `$0` stores the information of the command that has just been executed. In the above example, it would be the following string: `./my_script.sh`.
@@ -138,9 +147,11 @@ In this case we can use the `$@`. This will pack all the positional arguments in
 ```bash
 echo This message came from a script. All the provided positional arguments are: $@.
 ```
+
 You can now experiment with different number of arguments.
 
-> Further reading:
+> **Further reading**:
+>
 > - https://www.baeldung.com/linux/use-command-line-arguments-in-bash-script
 > - https://www.linux.org/threads/bash-04-%E2%80%93-input-from-user.39293/
 
@@ -279,6 +290,7 @@ else
   echo "The command returned an error. The file does not exist!"
 fi
 ```
+
 Try changing `ls if_statement.sh` into `ls case_statement.sh`.
 ### In case ...  do ...
 The `case` conditional statement has the following syntax:
@@ -322,6 +334,7 @@ case $i in
     ;;
 esac
 ```
+
 Similarly to what we've been doing before, let's execute this script with different values of the positional argument and observe the output.
 
 The `case` conditional statement does not understand numbers. It only works with strings. However, it does support pattern matching. We can try this out. Our task is to write a script that prints a greeting in the selected language. This script will support a limited number of languages and will warn us if we provide a language that it does not support. Our boss told that that it's imperative that it supports the following languages: English, Slovene and Klingon and the input to the script is the ISO 639-2 language code. We decide to expand the functionality and also allow the input to be case-insensitive name of the language.
@@ -356,7 +369,8 @@ Execute the script with different input arguments.
 Hints: In `case` statements the OR condition is defined with `|`. When doing pattern matching, `[...]` will match all characters enclosed in `[` and `]`.
 
 
-> Further reading:
+> **Further reading**:
+>
 > - https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Pattern-Matching
 > - https://linuxize.com/post/bash-case-statement/
 
@@ -406,6 +420,7 @@ do
   COMMANDS
 done
 ```
+
 The best way to learn something is to try an example. Let's say we are a university professor and we want to fairly grade the students that took our very unpopular course.
 ```bash
 #!/bin/bash
@@ -418,6 +433,7 @@ do
     echo ""
 done
 ```
+
 > **Note**: You see the following structure: `{0..3..1}`. What this expression defines a sequence of integers. It has the following syntax: `{START..END..INCREMENT}`.
 
 It is also possible to loop through the elements of an array directly. To achieve this, we rewrite the above for loop to the following:
@@ -442,7 +458,8 @@ done
 ```
 
 
-> Further reading:
+> **Further reading**:
+>
 > - https://linuxhint.com/bash_arithmetic_operations/
 
 ### Function definition
@@ -455,6 +472,7 @@ function_name () {
   COMMANDS
 }
 ```
+
 You are probably wondering "How do we define function arguments?". The answer is simple: you don't. Functions work the same way as any other Bash command when it comes to input arguments. You don't need to define, simply use them in the order they are provided.
 
 As usual, the best way to learn something is to trying it out. So we are going to write the following script (make it executable) into a file called `use_function.sh`:
@@ -474,32 +492,6 @@ print_args () {
 print_args sometext somemoretext number1 number2
 ```
 
-> Further reading:
+> **Further reading**:
+>
 > - https://linuxize.com/post/bash-functions/
-
-## Assignment
-
-You are a professor at a multi-planetary university. This year you started a new course entitled: "The Social Impacts of the Linux Operating System in the 20nd Century". The students attending this course are from France, Ireland, USA, and Kronos (Klingon home world). It's the time of the finals and the student have had an exam of this course. You asked your assistant to collect the grades of the students and forward them to you in a CSV (comma separated values) file. The data in the file should be ordered as follows: student name, exam grade, preferred language and other comments. The assistant gave you the following file (the extra empty line at the end is mandatory, see [https://www.iso.org/obp/ui/#iso:std:iso-iec:9899:ed-3:v1:en](https://www.iso.org/obp/ui/#iso:std:iso-iec:9899:ed-3:v1:en)):
-```
-Miles O'Brien,84,gle,Try to tune down the chatter
-Worf Rozhenko,76,tlh,Has a temper.
-Jean-Luc Picard,100,fra,Getting bald but it fits the character. Keep it up.
-Beverly Crusher,93,eng,
-
-```
-Your class currently has only 4 students but it seems that it was very popular so you expect many more next year. You want to write a script that generates text in the students' native languages informing them of their grade (passing criteria is 50/100) and adds comments from the assistant. This text should be printed in standard output so you can copy-paste it into an email. The text should additionally also be saved in a file with the following format: `Name_Surname.txt`.
-
-Hints:
- - The `cut` command can cut out a single piece of data from a string with a specified delimiter: `cut -d , -f 1`.
- - The `tr` (translate) command can be used to replace one character with another: `tr ' ' '_'`.
- - It is possible to pipe a file into the while loop with the following syntax:
- - By setting the `-e` flag with `echo` it is possible to use special characters like new line `\n`.
- ```bash
-while read -r line; do
-  COMMANDS
-done < /path/to/file
- ```
- - The `head -n <number>` command outputs the number of lines specified by `<number>` from top to bottom.
- - The `tail -n <number>` command outputs the the number of lines specified by `<number>` from bottom to top.
-
- > Expected time for the assignment: 45 minutes.

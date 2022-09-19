@@ -7,6 +7,7 @@ Before proceeding, let's make sure our working directory is `~/Documents`:
 ```
 $ cd ~/Documents
 ```
+
 ## Running processes in the foreground and background
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
@@ -19,6 +20,7 @@ To open `gedit` simply execute the following command:
 ```
 $ gedit
 ```
+
 After executing this command you should be met with `gedit`'s GUI:
 ![Gedit](../assets/images/gedit.png)
 
@@ -29,6 +31,23 @@ When closing graphical applications, we usually search for the `X` sign in the t
 
 For the sake of trying, let's open `gedit` again and this time we close it with `Ctrl+C`. You will notice that before `gedit` quits, a `^C` is printed. This means that the `Ctr+C` key was pressed.
 
+> **Note**: To get a list of all available kill signals simply type `kill -l`:
+> ```
+>  1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP
+>  6) SIGABRT      7) SIGBUS       8) SIGFPE       9) SIGKILL     10) SIGUSR1
+> 11) SIGSEGV     12) SIGUSR2     13) SIGPIPE     14) SIGALRM     15) SIGTERM
+> 16) SIGSTKFLT   17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP
+> 21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU     25) SIGXFSZ
+> 26) SIGVTALRM   27) SIGPROF     28) SIGWINCH    29) SIGIO       30) SIGPWR
+> 31) SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3
+> 38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8
+> 43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13
+> 48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12
+> 53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7
+> 58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2
+> 63) SIGRTMAX-1  64) SIGRTMAX
+> ```
+
 ### `fg`
 
 We now know how to start a process and how to terminate it. But what you will notice is that when a process is running, the command line is not usable. Try executing `echo I can't be printed`. You will notice that the desired message does not get printed.
@@ -37,6 +56,7 @@ To start a process and sending it to the background right away we use the `&` op
 ```
 $ gedit &
 ```
+
 You will notice that the usual `gedit` messages get printed. If you now press `Enter` you will see that the command line returns to normal and you can now use it as if `gedit` is not running. This is because it is running in the background.
 
 As mentioned before, `gedit` is a graphical application and can be closed by pressing the top-right `X` sign. What about processes that do not have a graphical user interface (GUI)? How would we close those?
@@ -45,15 +65,18 @@ Execute the following command:
 ```
 $ sleep 2
 ```
+
 The `sleep` commands wait for the defined time in seconds and then quits. The above command will therefore wait for 2 seconds and then quit. Not too exiting. Try executing it with the `&` at the end:
 ```
 $ sleep 2 &
 [1] 6691
 ```
+
 You will see the terminal printing some information about the process that has been sent into the background. The number `[1]` refers to the  sequential number of the job that we put into the background. The four digit number that follows is the process identifier, commonly referred to as PID. If you press `Enter` again the terminal will inform you that the processes has concluded:
 ```
 [1]+  Done                    sleep 2
 ```
+
 > **Note**: The PID that was displayed above was the PID that was displayed when writing this document. The PIDs are more or less randomly determined so you probably saw a different value.
 
 Let's increase the time for the sleep to 60 seconds. Don't worry, we are not going to just wait that this one minute is over. We are increasing the time so we can try terminating the process with `Ctrl+C`.
@@ -61,11 +84,13 @@ Let's increase the time for the sleep to 60 seconds. Don't worry, we are not goi
 $ sleep 60 &
 [1] 6791
 ```
+
 Try pressing `Ctrl+C`. You will notice that nothing happens, the process is still running. To terminate it, we need to first bring it from the background into the foreground. We do this with the `fg` command:
 ```
 $ fg
 sleep 60
 ```
+
 When executing the `fg` command, the terminal will inform you what process have you brought into the foreground. In our case it is `sleep 60`. We can now terminate it with the `Ctrl+C`.
 
 We can place as many processes in the background as we want. Let's try executing the `sleep 60 &` command multiple times, like three times:
@@ -74,6 +99,7 @@ $ sleep 60 &
 $ sleep 60 &
 $ sleep 60 &
 ```
+
 All the three `sleeps` are now in the background. To list all the processes running in the background of the current terminal simply execute the `jobs` command:
 ```
 $ jobs
@@ -99,11 +125,13 @@ Try running `gedit` and then press `Ctrl+Z`. You will see the following:
 ^Z
 [1]+  Stopped                 gedit
 ```
+
 It says that `gedit` is stopped. However, you still see its GUI. The GUI is visible, but we cannot type anything in it. That is because the process is stopped (not terminated!). A person that does not know what is going on could panic a bit because the program is not responding and we've already wrote some important things into it. No reason to panic! We can now resume the program with the `bg` command. This will instruct Linux to put `gedit` into the background and resume it. This is the same behavior we've seen when starting a process with a `&` at the end. As you can see, we can again interact with `gedit` and type things into our file.
 
 If we now want to bring the process back into the foreground, we simply type `fg`.
 
-> Further reading:
+> **Further reading**:
+>
 > - https://linux.die.net/Bash-Beginners-Guide/sect_12_01.html
 > - https://medium.com/@aantipov/what-happens-when-you-ctrl-c-in-the-terminal-36b093443e06
 
@@ -115,6 +143,7 @@ Before proceeding, start `gedit` with the trailing `&` so you put it runs in the
 ```
 $ gedit &
 ```
+
 Now close the terminal and open it again. Type `fg`, what do you see?
 ```
 $ fg
@@ -130,6 +159,7 @@ $ ps
  3683 pts/7    00:00:00 bash
  3978 pts/7    00:00:00 ps
 ```
+
 The `ps` command listed `bash` and `ps` as currently running processes. The first, `bash` is obvious as it is the current program on the operating system that processes the all the commands we provide it through the terminal. The second, `ps`, is the result of us running `ps` when listing all the running processes. Obviously, we started `ps` to list all the running processes and it identified itself as a running process.
 
 For each process we see the following information:
@@ -144,6 +174,7 @@ Let's try to provide `ps` some more flags and see a bit richer output:
 ```
 $ ps -A
 ```
+
 Now you are probably overwhelmed by the output! Do you see the `geddit` process anywhere?
 
 > **Note**: Remember `grep`! Use `ps ax | grep gedit`.
@@ -167,7 +198,9 @@ Solution:
 ```
 $ kill $(ps -A | grep gedit | tr -s ' ' | cut -d ' ' -f 2)
 ```
-> Further reading:
+
+> **Further reading**:
+>
 > - https://www.cyberciti.biz/faq/unix-kill-command-examples/
 > - https://man7.org/linux/man-pages/man7/signal.7.html
 <!-- Hidden information -->
@@ -186,6 +219,7 @@ After starting `htop` you are greeted with its Command Line Interface - CLI.
 ```
 $ htop
 ```
+
 The CLI looks something like this (image credits to [https://htop.dev](https://htop.dev)):
 ![htop](../assets/images/htop.png)
 
@@ -195,6 +229,7 @@ To demonstrate how `htop` can be used to terminate a process, we will start `ged
 ```
 $ gedit &
 ```
+
 Open `htop`. Read the lines at the bottom that state:
 `F1 Help`, `F2 Setup`, `F3 Search`, `F4 Filter`, `F5 Sorted`, `F6 Collap`, `F7 Nice -`, `F8 Nice +`, `F9 Kill`, `F10 Quit`
 

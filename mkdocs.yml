@@ -11,7 +11,7 @@ repo_url: https://github.com/tgaspar/linux-fe
 site_name: Robolab Linux
 nav:
     - Home: 'index.md'
-    - About: 'about/index.md'
+    # - About: 'about/index.md'
     - The Workshop:
       - Introduction: 'workshop/introduction.md'
       - The command line: 'workshop/command-line.md'
@@ -20,7 +20,7 @@ nav:
       - Pipes, redirects and File editing: 'workshop/piping-text-editing.md'
       - Process management: 'workshop/process-management.md'
       - Remote access: 'workshop/remote-access.md'
-      - Installing new tools : 'workshop/git-and-apt'
+      - Installing new tools : 'workshop/git-and-apt.md'
       - Shell scripts: 'workshop/shell-scripting.md'
     - Final Assignment: 'practical/index.md'
     - Additional knowledge: 'additional/index.md'

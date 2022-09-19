@@ -15,7 +15,7 @@ parse_comment (){
 eng_text (){
     echo -e "Dear $1!\n"\
 "It my pleasure to inform you that you passed the exam. Your grade is $2/100.\n"\
-"Additional cooments from the assistant: $3\n"\
+"Additional comments from the assistant: $3\n"\
 "Best regards, \n"\
 "Your teacher"
 }

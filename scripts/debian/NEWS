@@ -1,0 +1,12 @@
+cowsay (3.03+dfsg2-1) unstable; urgency=medium
+
+  Since cowsay 3.03+dfsg1-13, cowsay is now split into two packages:
+  cowsay and cowsay-off. cowsay contains the binaries as well as the
+  main cows. cowsay-off package contains the cows which some people
+  may consider to be offensive.
+
+  If you have installed cowsay a while ago, you may be relying on cows
+  which have been moved to cowsay-off. If that's the case, you'll need
+  to install that package to continue using them.
+
+ -- Tony Maillefaud <maltouzes@gmail.com>  Tue, 27 Dec 2016 11:00:26 +0200

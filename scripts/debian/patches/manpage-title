@@ -1,0 +1,15 @@
+Description: Fix capitalisation on man page title
+Forwarded: no
+Author: James McDonald <james@jamesmcdonald.com>
+
+--- a/cowsay.6
++++ b/cowsay.6
+@@ -8,7 +8,7 @@
+ .ds Nm Cowsay
+ .ds nm cowsay
+ .ds Vn 3.03
+-.TH \*(nm 6 "$Date: 1999/11/04 19:50:40 $"
++.TH COWSAY 6 "$Date: 1999/11/04 19:50:40 $"
+ .SH NAME
+ \*(nm/cowthink \- configurable speaking/thinking cow (and a bit more)
+ .SH SYNOPSIS

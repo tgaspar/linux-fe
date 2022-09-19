@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	install -D $(CURDIR)/cowsay $(CURDIR)/debian/cowsay/usr/games/cowsay
+	install -d $(CURDIR)/debian/cowsay/usr/share/cowsay
+	cp -a $(CURDIR)/cows $(CURDIR)/debian/cowsay/usr/share/cowsay
+	install -d $(CURDIR)/debian/cowsay-off/usr/share/cowsay/cows
+	mv $(CURDIR)/debian/cowsay/usr/share/cowsay/cows/bong.cow $(CURDIR)/debian/cowsay/usr/share/cowsay/cows/beavis.zen.cow $(CURDIR)/debian/cowsay/usr/share/cowsay/cows/mutilated.cow $(CURDIR)/debian/cowsay-off/usr/share/cowsay/cows
+	rm $(CURDIR)/debian/cowsay/usr/share/cowsay/cows/mech-and-cow
+	rm $(CURDIR)/debian/cowsay/usr/share/cowsay/cows/head-in.cow

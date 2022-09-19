@@ -47,16 +47,18 @@ Let's type the first command that is recognized by Shell and that is useful:
 ```
 $ echo
 ```
+
 What happened?
 
 ## Looking for help
 
-After running the first command you're probably disappointed that nothing "cool" happened. You're probably also wondering why did we say that you will run a `useful` command.
+After running the first command you're probably disappointed that nothing "cool" happened. You're probably also wondering why did we say that you will run a "useful" command.
 
 Well, a command is useful when used right. So let's look for more information about using the `echo` command:
 ```
 $ echo help
 ```
+
 You're now met with a short documentation how to use `echo`:
 ```
 echo: echo [-neE] [arg ...]
@@ -90,6 +92,7 @@ echo: echo [-neE] [arg ...]
     Exit Status:
     Returns success unless a write error occurs.
 ```
+
 Let's focus one the first couple of lines in this documentation:
 ```
 echo: echo [-neE] [arg ...]
@@ -104,6 +107,7 @@ When using shell commands we differentiate between arguments and flags. Flags co
 $ echo This workshop is amazing!
 This workshop is amazing!
 ```
+
 See? Much better!
 
 > **Tip:** Use `man` to open the manual of a command
@@ -149,5 +153,6 @@ $ bring-me-coffee
 
 After reading this you're probably asking yourself: "How will this bring me coffee?". We never promised you coffee, we said that we want Bash to recognize the command ¯\\\_(ツ)\_/¯.
 
-A relevant XKCD comic at the end: https://xkcd.com/456/
+A relevant XKCD comic at the end: [https://xkcd.com/456/](https://xkcd.com/456/)
+
 ![XKCD on Linux](../assets/images/man-pages.png)

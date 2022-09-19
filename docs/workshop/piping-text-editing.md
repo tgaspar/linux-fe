@@ -18,6 +18,7 @@ $ grep -R Frodo /usr/share/calendar
 /usr/share/calendar/calendar.lotr:09/28 Frodo wounded at Weathertop
 /usr/share/calendar/calendar.lotr:10/05 Frodo crosses bridge of Mitheithel
 ```
+
 Excellent! We know when Frodo will be where and can ambush him then. The Ring will finally be in its owners hand (on the owner's finger, to be precise).
 
 If we look closely at what happens here we can see that `grep` looked for all the instances it could find of the word `Frodo` in the `/usr/share/calendar` directory and its sub-directories.
@@ -29,12 +30,14 @@ Usage: grep [OPTION]... PATTERN [FILE]...
 Search for PATTERN in each FILE.
 ...
 ```
+
 In  our case we used it as follows: `-R` is an `[OPTION]` and tells grep to look for files recursively, `Frodo` is the `PATTERN` and `/usr/share/calendar` is the `[FILE]`. In Linux, we can pipe the output of one command into the input of another. Now that we know how `grep` works, let's test out the piping with a simple example:
 
 ```
 $ echo "Frodo: I will take the Ring thought I don't know the way" | grep -o Ring
 Ring
 ```
+
 > **Note**: We've read the help page before, but just in case you've forgotten: `-o` stands for `--only-matching` and it does `show only the part of a line matching PATTERN`
 
 Let's look at another example: check if a file exists in a certain directory:
@@ -50,12 +53,14 @@ zegrep
 zfgrep
 zgrep
 ```
+
 > **Note**: Using `grep` to filter from a long list of things is extremely useful when using for robotics. It's often used to look if a certain topic on the ROS network exists.
 
 Another very useful Linux command that is often used for manipulating strings and file contents is `sed`. Using `sed` on a file will be showcased later. For now, we show a simple string substitution:
 ```
 $ echo "Frodo wouldn't have got far without Sam, would he?" | sed 's/Sam/Sauron/'
 ```
+
 Here, we used `sed` to substitute all occurrences of `Sam` with `Sauron`. We did so by providing `sed` a "command". The command is `s` and what is after that has the following pattern: `/<expression>/<replacement>/flags`.
 
 > **Note**: We can stack as many piped commands as we want:
@@ -71,6 +76,7 @@ We've learned a very handy command that produces whatever output we type. So let
 ```
 $ echo "Hello people!" > greeting.txt
 ```
+
 We inspect the contents of the file and we are pleased to see that the computer is greeting us:
 ```
 $ cat greeting.txt
@@ -99,18 +105,21 @@ What happens when we use the `>` operator on the same file but with different co
 ```
 $ echo "We need to talk" > message.txt
 ```
+
 We now remember that we forgot to sign this message and want to add our name:
 ```
 $ echo "It's me, M" > message.txt
 $ cat message.txt
 It's me, M
 ```
+
 That didn't work, did it? The `>` operator will replace the contents in the file. If we want to append something, we need the `>>` operator:
 ```
 $ echo "We need to talk" > message.txt
 $ echo "It's me, M" >> message.txt
 $ cat message.txt
 ```
+
 ### The redirect operator `<`
 
 The `<` redirect operator takes the contents of a file and redirects them to the standard input of a command written before it.
@@ -119,6 +128,7 @@ Let's try to read the `calendar.lotr` file without using the `cat` command:
 ```
 $ grep Frodo < /usr/share/calendar/calendar.lotr
 ```
+
 We can see, that the result is the same.
 
 ## File editors
@@ -134,6 +144,7 @@ Let's quickly try editing a file with `nano`:
 ```
 $ nano delete_me.txt
 ```
+
 Once this command is executed your terminal will transform into a text editor. See the image below:
 ![Nano text editor](../assets/images/nano.jpg)
 
@@ -145,4 +156,53 @@ Before proceeding, let's remove the newly created file:
 ```
 $ rm delete_me.txt
 ```
+
 > **Note**: If you're having troubles exiting `nano`, follow the tooltips at the bottom. To exit `nano` simply press `Ctrl + X`.
+
+## The `.bashrc` file
+
+Whenever we start Bash interactively, there is a little script that runs first. We don't notice it, but it's sets up some very useful details. The script has the name `.bashrc` and is located in the root of the home directory.
+
+Before we explore its contents, let's try something. Type the `ll` command and observe the output. Looks familiar? Why is there a command that works very similarly to `ls` but is called `ll`? Let's see what this is about:
+```
+$ ll --help
+Usage: ls [OPTION]... [FILE]...
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+
+...
+```
+
+As you can see, `ll` actually invokes the `ls` command, which means, that `ll` is actually an alias! If it's an alias, it should have been defined somewhere, right?
+
+Let's explore the contents of the `~/.bashrc` file and look if this alias is defined there:
+```
+$ cat ~/.bashrc | grep ll=
+alias ll='ls -alF'
+```
+
+There it is! Let's now look at `~/.bashrc` with our text editor `nano`:
+```
+$ nano ~/.bashrc
+```
+
+> **Note:** At this point we will not go into the details of all the lines of the `.bashrc` file because it's out of the scope of this workshop. However, we will add a line at the bottom to showcase how it cane be used.
+
+Let's create a new alias that you are familiar with. Write the following line as the last line of the `.bashrc` file:
+```
+alias bring-me-coffee="echo Go get it yourself!"
+```
+
+Save the file and exit `nano`. The alias is now written in the `.bashrc` file. Do you think it will work if we try invoking the `bring-me-coffee` command?
+```
+$ bring-me-coffee
+bring-me-coffee: command not found
+```
+
+Close the currently open terminal and open a new one. Try the command again:
+```
+$ bring-me-coffee
+Go get it yourself!
+```
+
+> **Note** It is possible to invoke the `.bashrc` command also from the currently active terminal by doing `source ~/.bashrc`. It will have the same effect as opening a new interactive Bash shell. This is very often found in the Robot Operating System (ROS) tutorial.
