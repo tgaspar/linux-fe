@@ -14,6 +14,8 @@ Let's inspects what is displayed in there:
 - `~` - tells us what is the current working directory
 - `$` - tells us we are logged in as a normal user (as opposed to `root`, but more about this later).
 
+> **Note**: The computer that you are using my display different values for the user and machine name. Do no be confused about it, the meaning remains the same.
+
 We can try typing a command and see what happens:
 
 ```
@@ -54,9 +56,10 @@ What happened?
 
 After running the first command you're probably disappointed that nothing "cool" happened. You're probably also wondering why did we say that you will run a "useful" command.
 
-Well, a command is useful when used right. So let's look for more information about using the `echo` command:
+Well, a command is useful when used right. Knowing where to look for help is a very powerful asset when working in Linux. We can use two built-in commands to learn how certain other commands work: `help` and `man`. Let's use the two to learn more about `echo`:
+
 ```
-$ echo help
+$ help echo
 ```
 
 You're now met with a short documentation how to use `echo`:
@@ -93,7 +96,15 @@ echo: echo [-neE] [arg ...]
     Returns success unless a write error occurs.
 ```
 
-Let's focus one the first couple of lines in this documentation:
+Let's also try `man`:
+
+```
+$ man <command>
+```
+
+> **Tip:** Use `man` to open the manual of a command. When opening a manual page, our whole screen changes a bit. That is because we enter the manual of a command. In here, we can navigate up and down the page with the use of `Arrow Up` and `Arrow Down` keys. To exit the manual page, simply press the `Q` button.
+
+We go back to the output of `$ help echo` and focus one the first couple of lines in this documentation:
 ```
 echo: echo [-neE] [arg ...]
     Write arguments to the standard output.
@@ -110,10 +121,6 @@ This workshop is amazing!
 
 See? Much better!
 
-> **Tip:** Use `man` to open the manual of a command
-```
-$ man <command>
-```
 
 ## Let's tell the computer to get us coffee (i.e. the `alias` command)
 
