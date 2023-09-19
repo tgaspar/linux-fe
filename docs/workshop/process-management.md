@@ -139,7 +139,7 @@ If we now want to bring the process back into the foreground, we simply type `fg
 
 Sometimes there are processes running in the background that were not started by us or they were started in a different terminal. In those cases, we cannot access them by by `fg` and simply stop them with a `Ctrl+C`.
 
-Before proceeding, start `gedit` with the trailing `&` so you put it runs in the background:
+Before proceeding, start `gedit` with the trailing `&` so it runs in the background:
 ```
 $ gedit &
 ```
@@ -163,6 +163,7 @@ $ ps
 The `ps` command listed `bash` and `ps` as currently running processes. The first, `bash` is obvious as it is the current program on the operating system that processes the all the commands we provide it through the terminal. The second, `ps`, is the result of us running `ps` when listing all the running processes. Obviously, we started `ps` to list all the running processes and it identified itself as a running process.
 
 For each process we see the following information:
+
 - `PID` - the PID of the process
 - `TTY` - the name of the terminal the process was started in
 - `TIME` - the total accumulated CPU utilization time for a particular process
@@ -192,14 +193,16 @@ $ kill <GEDIT_PID>
 
 ### Intermediate exercise
 
-Start `gedit` in the background (`gedit &`). Use multiple commands to terminate `gedit` without manually typing its PID. Use `grep`, `tr` and `cut`.
+Start `gedit` in the background (`gedit &`). Use multiple commands to terminate `gedit` without manually typing its PID. To complete this task, try to use the following commands in succession like we learned before: `grep`, `tr` & `cut`.
+
+> **Note:** Use `man` and `help` (or `--help`) to figure out how to use these previously unknown commands!
+
 
 Solution:
 ```
 $ kill $(ps -A | grep gedit | tr -s ' ' | cut -d ' ' -f 2)
 ```
 
-> **Note** Do not worry too much about the `tr` and `cut` commands at this point. You will get to know the up close in the final assessment.
 
 > **Further reading**:
 >
