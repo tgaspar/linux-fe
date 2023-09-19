@@ -88,7 +88,7 @@ drwxr-xr-x   3 root root    4096 Jan 12  2021 home
 
 ![https://www.liquidweb.com](../assets/images/permissions.png)
 
-The permissions apply only to the directory itself and not too all the other subdirectories in the hierarchy. Let's try this in practice. Try creating a directory called `user1` in the `/home` directory:
+The permissions apply only to the directory itself and not to all the other subdirectories in the hierarchy. Let's try this in practice. Try creating a directory called `user1` in the `/home` directory:
 
 ```
 $ mkdir /home/user1
@@ -97,11 +97,17 @@ mkdir: cannot create directory ‘user1’: Permission denied
 
 Let's now have a look at the permissions of your own home directory:
 ```
-$ ls -l /home
-drwxr-xr-x  6 user user 4096 Mar 26  2020 user
+$ ls -ld /home
+
+drwxr-xr-x 3 root root 4096 Mar 26  2020 user
 ```
 
-As expected, we do have permissions to create directories in our space as we are the owner of this directory and the owner has the following permissions; `dwx` - `r`ead, `w`rite and e`x`ecute.
+As expected, we do **not** have permissions to write. This means we also cannot create directories in that directory. Looking at the permission flags, this should not be a surprise. The owner is `root` and it has the following permissions `dwx` - `r`ead, `w`rite and e`x`ecute. Everyone else is stuck with `r`ead and e`x`ecute
+
+Let's now inspect our own directory:
+```
+$ ls -ld ~
+```
 
 > **Note**: As you can see, the permission flags for this directory are `rwxr-xr-w`. Pay attention to the last part: `r-w`. What does this mean in terms of privacy? Exactly, by default, just about **anyone** can see the contents of this directory.
 
@@ -238,6 +244,11 @@ $ useradd -p 1234 reader
 ```
 
 > **Note**: This is just a demo. Do not use simple passwords as `1234` in your daily life.
+
+We can change the password of the `reader` user:
+```
+$ sudo passwd reader
+```
 
 Make sure you are in the `~/Desktop` directory and let's now `s`ubstitute `u`sers and log in as `reader`:
 ```

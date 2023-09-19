@@ -29,7 +29,7 @@ That's sad, right? But what are the commands we can use and who decides what's a
 <!-- The content in this page was inspired by: -->
 <!--  https://www.educative.io/courses/master-the-bash-shell/3j8399P3M6M -->
 
-The shell is a program on the operating system that processes the commands we provide it and returns results. The most common shell in Linux and the one we will be using throughout the workshop is `shell` ([GNU Bash](https://www.gnu.org/software/bash/)).
+The shell is a program on the operating system that processes the commands we provide it and returns results. The most common shell in Linux and the one we will be using throughout the workshop is `bash` ([GNU Bash](https://www.gnu.org/software/bash/)).
 
 From [educative.io](https://www.educative.io/courses/master-the-bash-shell/3j8399P3M6M):
 > Bash is a shell program.
@@ -127,7 +127,7 @@ See? Much better!
 As we learned before, Bash does not recognize `bring-me-coffee` as a valid command. Let's change this by
 defining `bring-me-coffee` as an `alias`.
 
-We should first look how to use this command:
+We should first learn how this command is used:
 ```
 $ alias --help
 alias: alias [-p] [name[=value] ... ]

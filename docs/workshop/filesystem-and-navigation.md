@@ -38,6 +38,8 @@ Documents  examples.desktop  Music  Public  Desktop  Downloads  Pictures  Templa
 
 The `ls` command listed something. What did it list?
 
+> **Note**: Look at the help of the `ls` command to learn more about it.
+
 That's right, these are all (non-hidden) directories. However, **where** are all of these directories? Where are we?! Let's find this out by `p`rinting the `w`orking `d`irecotry - `pwd`:
 ```
 $ pwd
@@ -59,7 +61,7 @@ As the name suggests, this is the directory that contains all the files that you
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!--  https://www.linux.com/training-tutorials/linux-filesystem-explained/ -->
-As promised before we will now look into how the Linux file system (Ubuntu, to be precise) is organized.
+As promised before, we will now look into how the Linux file system (Ubuntu, to be precise) is organized.
 
 Type the following command and observe the output:
 ```
@@ -111,6 +113,7 @@ We can now make a copy of this file and call it `file2` with the `c`o`p`y comman
 ```
 $ cp file file1
 ```
+
 The above command tells to make a copy of `file` (which we created earlier) into another file called `file2`.
 
 We can again inspect the contents of the directory:

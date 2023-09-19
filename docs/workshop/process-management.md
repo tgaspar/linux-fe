@@ -199,6 +199,8 @@ Solution:
 $ kill $(ps -A | grep gedit | tr -s ' ' | cut -d ' ' -f 2)
 ```
 
+> **Note** Do not worry too much about the `tr` and `cut` commands at this point. You will get to know the up close in the final assessment.
+
 > **Further reading**:
 >
 > - https://www.cyberciti.biz/faq/unix-kill-command-examples/
