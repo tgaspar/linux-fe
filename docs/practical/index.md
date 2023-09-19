@@ -9,7 +9,7 @@ Jean-Luc Picard,100,fra,Getting bald but it fits the character. Keep it up.
 Beverly Crusher,93,eng,
 ```
 
-Your class currently has only 4 students but it seems that it was very popular so you expect many more next year. You want to write a script that generates text in the students' native languages informing them of their grade (passing criteria is 50/100) and adds comments from the assistant. This text should be printed in standard output so you can copy-paste it into an email. The text should additionally also be saved in a file with the following format: `Name_Surname.txt`.
+Your class currently has only 4 students but it seems that it was very popular so you expect many more next year. You want to write a script that generates a text informing the students of their grade (passing criteria is 50/100) and adds comments from the assistant. Because you want to show them additional respect (no matter of their score), you want the greeting of the email to be in their native language. This text should be printed in standard output so you can copy-paste it into an email. The text should additionally also be saved in a file with the following format: `Name_Surname.txt`.
 
 Hints:
  - The `cut` command can cut out a single piece of data from a string with a specified delimiter: `cut -d , -f 1`.
@@ -23,5 +23,14 @@ done < /path/to/file
  ```
  - The `head -n <number>` command outputs the number of lines specified by `<number>` from top to bottom.
  - The `tail -n <number>` command outputs the the number of lines specified by `<number>` from bottom to top.
+
+Example of a text for Beverly Crusher:
+```
+Dear Beverly Crusher!
+It my pleasure to inform you that you passed the exam. Your grade is 93/100.
+Additional comments from the assistant:
+Best regards,
+Your teacher
+```
 
  > Expected time for the assignment: 45 minutes.

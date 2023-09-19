@@ -140,32 +140,36 @@ For now, we will provide a cheat sheet for the commands that help you manipulate
 ### `chmod`
 
 The `chmod` command offers two methods to manipulate with permissions on a single file or directory:
+
 1. by specifically adding (`+`) or removing (`-`) specific permissions (`rwx`) to the different permission groups (`u`, `g`, `o` or `a`). Examples:
-   1. Give everyone (owner, group and others) the permission to read the `secret` file:
-   ```
-   $ chmod a+r secret
-   ```
-   2. Give the group the permission to execute the file:
-   ```
-   $ chmod g+x secret
-   ```
-   3. Remove the permission to modify the file from others:
-   ```
-   $ chmod o-w secret
-   ```
+
+    1. Give everyone (owner, group and others) the permission to read the `secret` file:
+    ```
+    $ chmod a+r secret
+    ```
+    2. Give the group the permission to execute the file:
+    ```
+    $ chmod g+x secret
+    ```
+    3. Remove the permission to modify the file from others:
+    ```
+    $ chmod o-w secret
+    ```
+
 2. by defining the permissions bits where `rwx` each represent one bit (`r` is the last bit, `w` is the second bit and `x` is the first bit).
+
     1. Give everyone (owner, group and others) the permission to **only** read the `secret` file:
-   ```
-   $ chmod 444 secret
-   ```
-   2. Give **only** the group the permission to **only** execute the file:
-   ```
-   $ chmod 010 secret
-   ```
-   3. Give everyone except the others the permission to only read the file:
-   ```
-   $ chmod 440 secret
-   ```
+    ```
+    $ chmod 444 secret
+    ```
+    2. Give **only** the group the permission to **only** execute the file:
+    ```
+    $ chmod 010 secret
+    ```
+    3. Give everyone except the others the permission to only read the file:
+    ```
+    $ chmod 440 secret
+    ```
 
 The image below provides a helpful visualization of how the permission values are calculated from bits (source: [http://www.isaaczarb.com/working-with-linux-permissions/](http://www.isaaczarb.com/working-with-linux-permissions/)):
 
@@ -188,7 +192,7 @@ user
 
 We can create groups with `addgroups` command. For the sake of learning, let's create group called `readers`:
 ```
-addgroups readers
+sudo addgroups readers
 ```
 
 We can now start experimenting. Create a directory in `Desktop` called `only-readers`:
@@ -200,7 +204,7 @@ Try out what you can do. For instance, navigate into it with the `cd` command, l
 
 Let's now change the group of this directory and assign permissions of `rwx` to the group only. Navigate to the `Desktop` and invoke the following commands:
 ```
-$ chgrp readers only-readers
+$ sudo chgrp readers only-readers
 $ chmod 070 only-readers
 ```
 
@@ -213,10 +217,12 @@ Try the `cd`, `ls` and `touch` commands. What's the result?
 
 The reason why you no longer able to do anything there is because this directory's usage is now limited only to the group `readers` and you're not part of it. We can change this, though:
 ```
-$ usermod -a -G readers user
+$ sudo usermod -a -G readers user
 ```
 
 > **Note**: `-a` stands for `append` and `-G` stands for a list of groups. To know more check the help page - `usermod --help`.
+
+After this, you still won't have the access to the directory. That is because the change of the groups come to affect only after we log out and back in. Do that through the desktop environment.
 
 Finally, we again gained power of the `only-readers` directory. Yay!
 

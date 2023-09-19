@@ -8,7 +8,7 @@ site_description: >-
 repo_name: tgaspar/
 repo_url: https://github.com/tgaspar/linux-fe
 
-site_name: Robolab Linux
+site_name: Linux for Roboticists
 nav:
     - Home: 'index.md'
     # - About: 'about/index.md'
@@ -23,7 +23,7 @@ nav:
       - Installing new tools : 'workshop/git-and-apt.md'
       - Shell scripts: 'workshop/shell-scripting.md'
     - Final Assignment: 'practical/index.md'
-    - Additional knowledge: 'additional/index.md'
+    # - Additional knowledge: 'additional/index.md'
 theme:
   name: material
   palette:
@@ -38,9 +38,15 @@ theme:
   features:
       - toc.integrate
   favicon: assets/logo.png
+  icon:
+    admonition:
+      note: octicons/tag-16
   # logo: https://raw.githubusercontent.com/ros-infrastructure/artwork/master/orgunits/ros.svg
 
 markdown_extensions:
+  - admonition
+  - pymdownx.details
+  # - attr_list
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.highlight:
@@ -55,15 +61,15 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
+  # - extra-sass
   - with-pdf:
         # author: Timotej Gašpar
         copyright: 'Copyright: Laboratory of robotics, Faculty of Electrical Engineering'
-        #
         #cover: false
         #back_cover: true
         cover_logo: 'Cover Logo'
         #cover_title: TITLE TEXT
-        cover_subtitle: A practical workshop for students who want to learn Linux
+        cover_subtitle: A practical workshop for students who want to learn the basics of Linux and its command line
         #custom_template_path: TEMPLATES PATH
         #
         #toc_title: TOC TITLE TEXT

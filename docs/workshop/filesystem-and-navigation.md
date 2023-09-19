@@ -1,5 +1,5 @@
 Now that you're familiar with the terminal we can step back into the desktop environment:
-- Press `Ctrl+Alt+F7`
+- Press `Ctrl+Alt+F2`
 
 Tadaaah, we are welcomed by a friendly beaver:
 
@@ -20,7 +20,6 @@ To access the general operating system settings we click on the top-right down-p
 
 ![The settings button is on the left](../assets/images/ubuntu-settings.png)
 
-### Quick
 ## Navigation & exploration
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
@@ -247,13 +246,41 @@ $ cd dir\ with\ space
 
 Worked like charm!
 
+### Removing/deleting directories
+
+We learned how to remove files with `rm`. This command can also be used to remove directories. However, this command does not allow as to remove directories just like that. It's a safety feature. To remove directories, we need to use `rm` with some additional flags. Let's check the help of `rm` section:
+
+```
+$ rm --help
+```
+
+In there you will see following line:
+```
+...
+  -r, -R, --recursive   remove directories and their contents recursively
+...
+```
+
+Let's try this out by creating a new set of directories and then deleting them:
+
+```
+$ mkdir -p remove/delete/me
+```
+
+Now try to delete all of them by removing the parent directory `remove` with the `rm` command:
+```
+$ rm -r remove
+```
+
+> **Note**: Sometimes, this might not be enough because there might be some files in the directory. If you check the help section of `rm` again, you will see there is a `-f` flag. This stands for `force`. Use this when in doubt.
+
 ## Exercise
 
 <!-- Hidden information -->
 <!-- The content in this page was inspired by: -->
 <!--  -->
 
-1. Without leaving the `Desktop` directory, create the following directory hierarchy in `home/user/Documents`: `Workshops/Linux FE`.
+1. Without leaving the `Desktop` directory, create the following directory hierarchy in `/home/user/Documents`: `Workshops/Linux FE`. **Note**: Your username might not be `user` but something else. That means, that the path to your `Documents` directory might be a little bit different.
 
 2. Without leaving the `Desktop` directory, create a file in the newly created directory called `morning.txt`.
 
